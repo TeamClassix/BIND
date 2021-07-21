@@ -14,5 +14,5 @@ __________
 WIP
 __________
 ### Technologies
-**React**, for frontend work
+**React**, for frontend work\
 **Express.JS** to serve frontend files
