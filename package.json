@@ -1,0 +1,29 @@
+{
+  "name": "team-classix-fec",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeamClassix/FECcapstone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TeamClassix/FECcapstone/issues"
+  },
+  "homepage": "https://github.com/TeamClassix/FECcapstone#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.12",
+    "webpack": "^5.45.1"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "styled-components": "^5.3.0"
+  }
+}
