@@ -1,0 +1,7 @@
+/** Please try to limit app scoped styling within components using styled-components **/
+
+body {
+  display: flex;
+  background-color: rgb(65, 255, 65);
+  margin: 0;
+}
