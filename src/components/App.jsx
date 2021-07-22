@@ -10,15 +10,23 @@ import QuestionsAnswers from './QandA/QandA.jsx';
 import RatingsReviews from './RatingsReviews/RatingsReviews.jsx';
 import Footer from './Footer/Footer.jsx';
 
+const MainContainer = styled.div`
+  width: 1180px;
+  align-self: center;
+  flex: 1 1 100%;
+`;
+
 const App = () => {
   return (
     <>
       <Header />
       <SiteMessage />
-      <ProductOverview />
-      <RelatedProducts />
-      <QuestionsAnswers />
-      <RatingsReviews />
+      <MainContainer>
+        <ProductOverview />
+        <RelatedProducts />
+        <QuestionsAnswers />
+        <RatingsReviews />
+      </MainContainer>
       <Footer />
     </>
   )

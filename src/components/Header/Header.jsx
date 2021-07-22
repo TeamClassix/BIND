@@ -6,14 +6,14 @@ const HeaderDiv = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: #557174;
+  background-color: #9DAD7F;
   color: #fff;
-  height: 90px;
+  max-height: 60px;
+  min-height: 60px;
   padding: 0 45px;
 `;
 const Logo = styled.div`
   font-weight: 800;
-  font-variant: small-caps;
   font-size: 1.5em;
   text-decoration: underline;
 `;
