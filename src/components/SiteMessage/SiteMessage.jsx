@@ -10,7 +10,11 @@ const MessageDiv = styled.div`
 
 const SiteMessage = () => (
   <MessageDiv>
-    <em>Site-wide announcement message!</em> - Sale / Discount <strong>offer</strong> - <u>New Product Highlight</u>
+    <em>Site-wide announcement message!</em>
+    {' - Sale / Discount '}
+    <strong>offer</strong>
+    {' - '}
+    <u>New Product Highlight</u>
   </MessageDiv>
 );
 
