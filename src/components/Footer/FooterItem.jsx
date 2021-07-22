@@ -6,7 +6,7 @@ const FooterMenu = ({ title, data }) => (
   <MenuContainer>
     <MenuTitleDiv>{title}</MenuTitleDiv>
     <MenuItemUl>
-      {data && data.items.map((item) => (
+      {data && data.items && data.items.map((item) => (
         <MenuItemLi key={item.name}>
           <MenuItemLiA target={item.target} href={item.url}>{item.name}</MenuItemLiA>
         </MenuItemLi>
@@ -14,6 +14,22 @@ const FooterMenu = ({ title, data }) => (
     </MenuItemUl>
   </MenuContainer>
 );
+
+FooterMenu.propTypes = {
+  title: PropTypes.string.isRequired,
+  data: PropTypes.shape({
+    items: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string,
+      url: PropTypes.string,
+      target: PropTypes.string,
+    })),
+  }),
+};
+FooterMenu.defaultProps = {
+  data: {
+    items: null,
+  },
+};
 
 const MenuContainer = styled.div`
   display: flex;
@@ -48,23 +64,5 @@ const MenuTitleDiv = styled.div`
   border-bottom: 1px solid #f7f7e8;
   padding: 0 15px 2px 15px;
 `;
-
-// FooterMenu.propTypes = {
-//   title: PropTypes.string.isRequired,
-//   data: PropTypes.shape({
-//     items: PropTypes.shape([
-//       PropTypes.shape({
-//         name: PropTypes.string,
-//         url: PropTypes.string,
-//         target: PropTypes.string,
-//       }),
-//     ]),
-//   }),
-// };
-// FooterMenu.defaultProps = {
-//   data: {
-//     items: null,
-//   },
-// };
 
 export default FooterMenu;
