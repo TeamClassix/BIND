@@ -1,7 +1,15 @@
 /** Please try to limit app scoped styling within components using styled-components **/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 body {
   display: flex;
-  background-color: rgb(65, 255, 65);
   margin: 0;
+}
+
+#app {
+  width: 100%;
+  background-color: #F7F7E8;
+  color: #525252;
+  min-height: 100vh;
+  font-family: 'Roboto', 'sans-serif';
 }

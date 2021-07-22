@@ -1,7 +1,10 @@
 import React from 'react';
+import styled from 'styled-components';
 
-const demo = () => (
-  <div>relatedprod</div>
+
+
+const RelatedProducts = () => (
+  <div></div>
 );
 
-export default demo;
+export default RelatedProducts;

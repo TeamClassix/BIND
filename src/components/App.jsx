@@ -1,4 +1,7 @@
 import React from 'react';
+import styled from 'styled-components';
+
+// Components
 import Header from './Header/Header.jsx';
 import SiteMessage from './SiteMessage/SiteMessage.jsx';
 import ProductOverview from './ProductOverview/Overview.jsx';
@@ -10,13 +13,13 @@ import Footer from './Footer/Footer.jsx';
 const App = () => {
   return (
     <>
-    <Header />
-    <SiteMessage />
-    <ProductOverview />
-    <RelatedProducts />
-    <QuestionsAnswers />
-    <RatingsReviews />
-    <Footer />
+      <Header />
+      <SiteMessage />
+      <ProductOverview />
+      <RelatedProducts />
+      <QuestionsAnswers />
+      <RatingsReviews />
+      <Footer />
     </>
   )
 }
