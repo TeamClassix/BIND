@@ -42,9 +42,9 @@ const SearchSubmit = styled.div`
   margin-left: 10px;
 `;
 
-const Header = props => (
+const Header = () => (
   <HeaderDiv>
-    <Logo className="logo">Team Classix</Logo>
+    <Logo className="logo">Bind</Logo>
     <SearchContainer className="search">
       <SearchInput className="search-input" placeholder="Search" />
       <SearchSubmit className="search-submit" />

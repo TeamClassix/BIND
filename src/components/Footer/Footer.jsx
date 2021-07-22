@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import FooterItem from './FooterItem.jsx';
+import FooterItem from './FooterItem';
 
 const FooterDiv = styled.div`
   display: flex;
@@ -43,8 +43,8 @@ const MenuItems = {
         name: 'Michael Chan',
         url: 'https://github.com/WuksGG',
         target: '_blank',
-      }
-    ]
+      },
+    ],
   },
   menu_2: {
     items: [
@@ -57,9 +57,9 @@ const MenuItems = {
         name: 'Contact Us',
         url: '#',
         target: '_blank',
-      }
-    ]
-  }
+      },
+    ],
+  },
 };
 
 const Footer = () => (

@@ -16,20 +16,18 @@ const MainContainer = styled.div`
   flex: 1 1 100%;
 `;
 
-const App = () => {
-  return (
-    <>
-      <Header />
-      <SiteMessage />
-      <MainContainer>
-        <ProductOverview />
-        <RelatedProducts />
-        <QuestionsAnswers />
-        <RatingsReviews />
-      </MainContainer>
-      <Footer />
-    </>
-  )
-}
+const App = () => (
+  <>
+    <Header />
+    <SiteMessage />
+    <MainContainer>
+      <ProductOverview />
+      <RelatedProducts />
+      <QuestionsAnswers />
+      <RatingsReviews />
+    </MainContainer>
+    <Footer />
+  </>
+);
 
 export default App;
