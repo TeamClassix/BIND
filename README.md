@@ -1,6 +1,6 @@
-[![CircleCI](https://circleci.com/gh/TeamClassix/FECcapstone.svg?style=shield)](https://circleci.com/gh/TeamClassix/FECcapstone)
+[![CircleCI](https://circleci.com/gh/TeamClassix/Bind.svg?style=shield)](https://circleci.com/gh/TeamClassix/Bind)
 
-# FECcapstone
+# Bind Online - An Immersive E-Commerce Experience
 
 ### Project Description
 The FEC Capstone is our cohort's project within Hack Reactor's Senior Phase curriculum; and allows us, as a team of 4, to work modularly and to some extent independently, towards creating a cohesive web application with a number of specifications provided by our "client".
