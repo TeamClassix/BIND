@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import FooterMenu from './FooterMenu.jsx';
+import FooterItem from './FooterItem.jsx';
 
 const FooterDiv = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ const FooterDiv = styled.div`
 `;
 const FooterMenusDiv = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   width: 1180px;
 `;
 const CopyrightDiv = styled.div`
@@ -23,7 +23,6 @@ const CopyrightDiv = styled.div`
 `;
 const MenuItems = {
   menu_1: {
-    title: 'Our Team',
     items: [
       {
         name: 'Jesse Chung',
@@ -48,7 +47,6 @@ const MenuItems = {
     ]
   },
   menu_2: {
-    title: 'test',
     items: [
       {
         name: 'About Us',
@@ -67,10 +65,10 @@ const MenuItems = {
 const Footer = () => (
   <FooterDiv>
     <FooterMenusDiv>
-      <FooterMenu data={MenuItems.menu_1} />
-      <FooterMenu data={MenuItems.menu_1} />
-      <FooterMenu data={MenuItems.menu_1} />
-      <FooterMenu data={MenuItems.menu_2} />
+      <FooterItem title="Our Team" data={MenuItems.menu_1} />
+      <FooterItem title="Our Team" data={MenuItems.menu_1} />
+      <FooterItem title="Our Team" data={MenuItems.menu_1} />
+      <FooterItem title="Contact Us" />
     </FooterMenusDiv>
     <CopyrightDiv>Copyright &copy; 2021 Team Classix. All rights reserved.</CopyrightDiv>
   </FooterDiv>

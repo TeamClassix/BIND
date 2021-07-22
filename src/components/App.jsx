@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Components
-import Header from './Header/Header.jsx';
-import SiteMessage from './SiteMessage/SiteMessage.jsx';
-import ProductOverview from './ProductOverview/Overview.jsx';
-import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
-import QuestionsAnswers from './QandA/QandA.jsx';
-import RatingsReviews from './RatingsReviews/RatingsReviews.jsx';
-import Footer from './Footer/Footer.jsx';
+import Header from './Header/Header';
+import SiteMessage from './SiteMessage/SiteMessage';
+import ProductOverview from './ProductOverview/Overview';
+import RelatedProducts from './RelatedProducts/RelatedProducts';
+import QuestionsAnswers from './QandA/QandA';
+import RatingsReviews from './RatingsReviews/RatingsReviews';
+import Footer from './Footer/Footer';
 
 const MainContainer = styled.div`
   width: 1180px;
