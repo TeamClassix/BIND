@@ -5,7 +5,6 @@ const MenuContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 15px;
 `;
 const MenuItemUl = styled.ul`
   list-style-type: none;
@@ -41,7 +40,7 @@ const FooterMenu = props => (
     <MenuTitleDiv>{props.data.title}</MenuTitleDiv>
     <MenuItemUl>
       {props.data.items.map((item, i) => {
-        return <MenuItemLi key={i}><MenuItemLiA href={item.url}>{item.name}</MenuItemLiA></MenuItemLi>
+        return <MenuItemLi key={i}><MenuItemLiA target={item.target} href={item.url}>{item.name}</MenuItemLiA></MenuItemLi>
       })}
     </MenuItemUl>
   </MenuContainer>
