@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/TeamClassix/FECcapstone.svg?style=shield)](https://circleci.com/gh/TeamClassix/FECcapstone)
+
 # FECcapstone
 
 ### Project Description
