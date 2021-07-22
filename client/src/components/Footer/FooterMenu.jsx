@@ -2,21 +2,28 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const FooterMenu = ({ title, data }) => (
-  <MenuContainer>
-    <MenuTitleDiv>{title}</MenuTitleDiv>
-    <MenuItemUl>
-      {data && data.items && data.items.map((item) => (
-        <MenuItemLi key={item.name}>
-          <MenuItemLiA target={item.target} href={item.url}>{item.name}</MenuItemLiA>
-        </MenuItemLi>
-      ))}
-    </MenuItemUl>
-  </MenuContainer>
+const FooterMenu = ({ data }) => (
+  <MenuItemUl>
+    {data && data.items && data.items.map((item) => (
+      <MenuItemLi key={item.name}>
+        <MenuItemLiA
+          onMouseEnter={(ev) => {
+            // console.log({
+            //   xy: ev.target.getBoundingClientRect(),
+            //   clientY: ev.clientY,
+            // });
+          }}
+          target={item.target}
+          href={item.url}
+        >
+          {item.name}
+        </MenuItemLiA>
+      </MenuItemLi>
+    ))}
+  </MenuItemUl>
 );
 
 FooterMenu.propTypes = {
-  title: PropTypes.string.isRequired,
   data: PropTypes.shape({
     items: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string,
@@ -31,11 +38,6 @@ FooterMenu.defaultProps = {
   },
 };
 
-const MenuContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
 const MenuItemUl = styled.ul`
   list-style-type: none;
   padding-inline-start: 0;
@@ -58,11 +60,6 @@ const MenuItemLiA = styled.a`
 const MenuItemLi = styled.li`
   margin: 2px;
 `;
-const MenuTitleDiv = styled.div`
-  font-weight: 500;
-  font-size: 1.2em;
-  border-bottom: 1px solid #f7f7e8;
-  padding: 0 15px 2px 15px;
-`;
+
 
 export default FooterMenu;
