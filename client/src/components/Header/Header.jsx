@@ -16,6 +16,7 @@ const Logo = styled.div`
   font-weight: 800;
   font-size: 1.5em;
   text-decoration: underline;
+  text-transform: uppercase;
 `;
 const SearchContainer = styled.div`
   display: flex;
