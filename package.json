@@ -6,12 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-dev": "webpack -w",
-<<<<<<< HEAD
     "test1": "jest",
-    "test2": "react-scripts test --env=jsdom"
-=======
+    "test2": "react-scripts test --env=jsdom",
     "server-dev": "node server/server.js"
->>>>>>> 05cbf116dd48e9458a5dbec2e77501552c8ff4a0
   },
   "repository": {
     "type": "git",
@@ -39,26 +36,19 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-<<<<<<< HEAD
     "global-jsdom": "^8.1.0",
     "jest": "^27.0.6",
     "jsdom": "^16.6.0",
-=======
->>>>>>> 05cbf116dd48e9458a5dbec2e77501552c8ff4a0
     "nodemon": "^2.0.12",
     "webpack": "^5.45.1",
     "webpack-cli": "^4.7.2"
   },
   "dependencies": {
-<<<<<<< HEAD
     "axios": "^0.21.1",
     "express": "^4.17.1",
     "jest-cli": "^27.0.6",
-=======
     "dotenv": "^10.0.0",
-    "express": "^4.17.1",
     "prop-types": "^15.7.2",
->>>>>>> 05cbf116dd48e9458a5dbec2e77501552c8ff4a0
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "styled-components": "^5.3.0"

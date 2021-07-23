@@ -15,22 +15,14 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-<<<<<<< HEAD
             presets: ['@babel/preset-env', '@babel/preset-react']
           }
         }
       }
     ]
-  }
-=======
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-          },
-        },
-      },
-    ],
   },
+
   resolve: {
     extensions: ['.js', '.jsx'],
   },
->>>>>>> 05cbf116dd48e9458a5dbec2e77501552c8ff4a0
 };

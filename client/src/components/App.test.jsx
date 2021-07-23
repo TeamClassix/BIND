@@ -12,7 +12,6 @@ describe('App', () => {
   test('renders App component', () => {
     render(<App />);
 
-    screen.debug();
   });
 });
 
