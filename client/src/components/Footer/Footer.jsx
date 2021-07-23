@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import FooterItem from './FooterItem';
+import FooterMenu from './FooterMenu';
 
 const FooterDiv = styled.div`
   display: flex;
@@ -20,6 +20,17 @@ const FooterMenusDiv = styled.div`
 `;
 const CopyrightDiv = styled.div`
   margin-top:15px;
+`;
+const MenuContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const MenuTitleDiv = styled.div`
+  font-weight: 500;
+  text-transform: uppercase;
+  border-bottom: 1px solid #f7f7e8;
+  padding: 0 15px 2px 15px;
 `;
 const MenuItems = {
   menu_1: {
@@ -65,10 +76,25 @@ const MenuItems = {
 const Footer = () => (
   <FooterDiv>
     <FooterMenusDiv>
-      <FooterItem title="Our Team" data={MenuItems.menu_1} />
-      <FooterItem title="Our Team" data={MenuItems.menu_1} />
-      <FooterItem title="Our Team" data={MenuItems.menu_1} />
-      <FooterItem title="Contact Us" />
+      <MenuContainer>
+        <MenuTitleDiv>Our Team</MenuTitleDiv>
+        <FooterMenu data={MenuItems.menu_1} />
+      </MenuContainer>
+      <MenuContainer>
+        <MenuTitleDiv>Our Team</MenuTitleDiv>
+        <FooterMenu data={MenuItems.menu_1} />
+      </MenuContainer>
+      <MenuContainer>
+        <MenuTitleDiv>Our Team</MenuTitleDiv>
+        <div>
+          <div>12333 W Olympic Blvd</div>
+          <div>Santa Monica</div>
+        </div>
+      </MenuContainer>
+      <MenuContainer>
+        <MenuTitleDiv>Find Us on GitHub</MenuTitleDiv>
+        <FooterMenu data={MenuItems.menu_1} />
+      </MenuContainer>
     </FooterMenusDiv>
     <CopyrightDiv>Copyright &copy; 2021 Team Classix. All rights reserved.</CopyrightDiv>
   </FooterDiv>

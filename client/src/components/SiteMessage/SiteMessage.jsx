@@ -6,6 +6,7 @@ const MessageDiv = styled.div`
   text-transform: uppercase;
   font-size: 0.7em;
   padding: 10px;
+  background-color: #C7CFB7;
 `;
 
 const SiteMessage = () => (

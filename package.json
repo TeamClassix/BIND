@@ -2,10 +2,11 @@
   "name": "team-classix-fec",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-dev": "webpack -w"
+    "build-dev": "webpack -w",
+    "server-dev": "node server/server.js"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,7 @@
     "webpack-cli": "^4.7.2"
   },
   "dependencies": {
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
@@ -43,7 +45,7 @@
     "node": ">12.19.0"
   },
   "imports": {
-    "#components/*": "./src/components/*",
-    "#helpers/*": "./src/helpers/*"
+    "#components/*": "./client/src/components/*",
+    "#helpers/*": "./client/src/helpers/*"
   }
 }
