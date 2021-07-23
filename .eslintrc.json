@@ -1,21 +1,32 @@
 {
     "env": {
         "browser": true,
+<<<<<<< HEAD
         "es6": true
+=======
+        "es2021": true
+>>>>>>> 05cbf116dd48e9458a5dbec2e77501552c8ff4a0
     },
     "extends": [
         "plugin:react/recommended",
         "airbnb"
     ],
+<<<<<<< HEAD
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
     },
+=======
+>>>>>>> 05cbf116dd48e9458a5dbec2e77501552c8ff4a0
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
         },
+<<<<<<< HEAD
         "ecmaVersion": 2018,
+=======
+        "ecmaVersion": 12,
+>>>>>>> 05cbf116dd48e9458a5dbec2e77501552c8ff4a0
         "sourceType": "module"
     },
     "plugins": [
@@ -23,4 +34,8 @@
     ],
     "rules": {
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 05cbf116dd48e9458a5dbec2e77501552c8ff4a0

@@ -6,11 +6,16 @@ const MessageDiv = styled.div`
   text-transform: uppercase;
   font-size: 0.7em;
   padding: 10px;
+  background-color: #C7CFB7;
 `;
 
 const SiteMessage = () => (
   <MessageDiv>
-    <em>Site-wide announcement message!</em> - Sale / Discount <strong>offer</strong> - <u>New Product Highlight</u>
+    <em>Site-wide announcement message!</em>
+    {' - Sale / Discount '}
+    <strong>offer</strong>
+    {' - '}
+    <u>New Product Highlight</u>
   </MessageDiv>
 );
 
