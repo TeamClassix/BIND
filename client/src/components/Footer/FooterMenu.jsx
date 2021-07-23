@@ -7,12 +7,6 @@ const FooterMenu = ({ data }) => (
     {data && data.items && data.items.map((item) => (
       <MenuItemLi key={item.name}>
         <MenuItemLiA
-          onMouseEnter={(ev) => {
-            // console.log({
-            //   xy: ev.target.getBoundingClientRect(),
-            //   clientY: ev.clientY,
-            // });
-          }}
           target={item.target}
           href={item.url}
         >
@@ -59,7 +53,7 @@ const MenuItemLiA = styled.a`
 `;
 const MenuItemLi = styled.li`
   margin: 2px;
+  font-weight: 300;
 `;
-
 
 export default FooterMenu;

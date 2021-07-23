@@ -20,4 +20,4 @@ node_modules/
 .env.test
 
 # Bundled files
-dist/bundle.js
+client/dist/bundle.js
