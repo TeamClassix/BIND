@@ -12,7 +12,7 @@ ____________
 In order to compile the application and create the bundle:
 1. Run `npm install` to install application depencies,
 2. Use the command `npm run build-dev` to bundle the source files with Webpack,
-3. Start the server, using the command `npm start`. You can now access the site at http://localhost:5000.
+3. Start the server, using the command `npm run server-dev`. You can now access the site at http://localhost:5000.
 __________
 ### Testing
 WIP
