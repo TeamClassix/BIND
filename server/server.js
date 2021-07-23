@@ -8,9 +8,7 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
 
-// app.get('/users/:userId/books/:bookId', function (req, res) {
-//   res.send(req.params)
-// })
+
 app.use(express.json());
 
 // process.env.GH_token
@@ -18,11 +16,12 @@ app.use(express.json());
 
 app.get('/cheese', (req, res) => {
   console.log(req);
+  console.log(process.env.GH_token);
 
   axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/products', {
 
     headers: {
-      Authorization: "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"
+      Authorization: process.env.GH_TOKEN
     },
   })
     .then((response) => {
@@ -44,7 +43,7 @@ app.get('/bees', (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/products/${req.query.ID}`, {
 
     headers: {
-      Authorization: "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"
+      Authorization: process.env.GH_TOKEN
     },
   })
     .then((response) => {
@@ -57,12 +56,13 @@ app.get('/bees', (req, res) => {
 
 
 app.get('/dees', (req, res) => {
+  console.log(process.env.GH_TOKEN, 'the token');
   console.log(req.query.ID, 'req.query.ID');
 
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/products/${req.query.ID}/styles`, {
 
     headers: {
-      Authorization: "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"
+      Authorization: process.env.GH_TOKEN
     },
   })
     .then((response) => {
