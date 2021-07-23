@@ -45,6 +45,8 @@
     "node": ">12.19.0"
   },
   "imports": {
+    "#models": "./server/models/index.js",
+    "#helpers": "./server/helpers/index.js",
     "#components/*": "./client/src/components/*",
     "#helpers/*": "./client/src/helpers/*"
   }
