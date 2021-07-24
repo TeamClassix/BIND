@@ -19,4 +19,5 @@ WIP
 __________
 ### Technologies
 **React**, for frontend work\
-**Express.JS** to serve frontend files
+└ **Webpack + Babel**, for React compilation and bundling\
+**Express.JS**, for serving frontend files
