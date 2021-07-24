@@ -6,6 +6,7 @@ const router = express.Router();
 // /api
 // Treat API as 1:1 proxy
 router.use(async (req, res, next) => {
+  const { _parsedUrl: parsedUrl } = req;
   try {
     const result = await axios({
       method: req.method,
@@ -14,11 +15,15 @@ router.use(async (req, res, next) => {
       },
       params: req.query,
       data: req.body,
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo${req._parsedUrl.pathname}`,
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo${parsedUrl.pathname}`,
     });
     next([200, result.data]);
   } catch (e) {
-    console.log(e);
+    // console.log(e);
+    // process.stderr.write(e.message);
+    // process.stderr.write('\n');
+    process.stderr.write(e.stack);
+    process.stderr.write('\n\n');
     next([e.response.status, e.response.data]);
   }
 });

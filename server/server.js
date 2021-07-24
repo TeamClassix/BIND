@@ -42,8 +42,9 @@ process.on('uncaughtException', (e) => {
     process.stdout.write(`\x1b[93m> Express tried to listen on port ${e.port}, but it's already in use.\x1b[30m\n`);
     process.stdout.write('\x1b[93m> Please specify a different port, or terminate any processes \nlistening on the port.\x1b[39m\n\n');
   } else {
-    console.log(e);
-    // process.stdout.write(`\x1b[93m${JSON.stringify(e)}\x1b[39m\n`);
+    // console.log(e);
+    // console.log(Object.keys(e));
+    process.stderr.write(`\x1b[93m${e.stack}\x1b[39m\n`);
   }
   process.stdout.write('\x1b[0m');
 });
