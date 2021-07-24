@@ -23,8 +23,7 @@ module.exports = ([statusCode, data], req, res, next) => {
   } else if (statusCode === 503) {
     responseObj.message = 'Backend Server at Capacity';
   } else {
-    // responseObj.statusCode = 520;
-    responseObj.statusCode = statusCode;
+    responseObj.statusCode = statusCode || 520;
     responseObj.message = data || 'Some unknown error has occurred. Please contact an administrator to report this issue.';
     responseObj.contact = 'admin@example.com';
   }
