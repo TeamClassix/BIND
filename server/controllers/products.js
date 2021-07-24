@@ -6,7 +6,6 @@ const router = express.Router({ mergeParams: true });
 
 router.use((req, res, next) => {
   process.stdout.write('Controller: /api/products\n');
-  console.log(Models.products.get);
   next();
 });
 
