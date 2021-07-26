@@ -6,7 +6,7 @@ import Header from './Header/Header';
 import SiteMessage from './SiteMessage/SiteMessage';
 import ProductOverview from './ProductOverview/Overview';
 import RelatedProducts from './RelatedProducts/RelatedProducts';
-import QuestionsAnswers from './QandA/QandA';
+import QuestionsAnswers from './QandA/App';
 import RatingsReviews from './RatingsReviews/RatingsReviews';
 import Footer from './Footer/Footer';
 
