@@ -6,9 +6,7 @@ const PreviewList = ({ title, list }) => {
     <div>
       <h1>{title}</h1>
       <div>
-        {list.map(item => {
-          return <ItemPreview key={item.id} value={item} />;
-        })}
+        {list.map(item => <ItemPreview key={item.id} value={item} />)}
       </div>
     </div>
   );

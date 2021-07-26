@@ -6,7 +6,7 @@ import RelatedProductsContext from '#contexts/RelatedProducts';
 import PreviewList from './PreviewList';
 
 const RelatedProducts = () => {
-  const [ useRPState, setRPState ] = useState({
+  const [useRPState, setRPState] = useState({
     related: [],
     outfit: [],
   });
