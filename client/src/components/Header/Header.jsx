@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const HeaderDiv = styled.div`
   display: flex;
@@ -17,6 +18,9 @@ const Logo = styled.div`
   font-size: 1.5em;
   text-decoration: underline;
   text-transform: uppercase;
+  &a:visited {
+    color: #fff;
+  }
 `;
 const SearchContainer = styled.div`
   display: flex;
@@ -42,10 +46,15 @@ const SearchSubmit = styled.div`
   background-size: contain;
   margin-left: 10px;
 `;
+const StyledLink = styled(Link)`
+  &:visited {
+    color: #fff;
+  }
+`;
 
 const Header = () => (
   <HeaderDiv>
-    <Logo className="logo">Bind</Logo>
+    <Logo className="logo"><StyledLink to="/">Bind</StyledLink></Logo>
     <SearchContainer className="search">
       <SearchInput className="search-input" placeholder="Search" />
       <SearchSubmit className="search-submit" />

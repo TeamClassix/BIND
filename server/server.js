@@ -10,16 +10,22 @@ app.use(express.urlencoded({ extended: true }));
 
 // TODO: Implement rate limiting
 
+// Handle/proxy requests to the API
+app.use('/api', require('./controllers'));
+
 // Serve static files from client/dist
 app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
 
-// Handle/proxy requests to the API
-app.use('/api', require('./controllers'));
+// Final catch-all, handle with React
+app.get('/:slug/:id([0-9]{3,7})', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
+});
 
 // No matching path found. Throw 404 error.
 app.use((req, res) => {
   res.status(404).json({
     message: 'Not found',
+    method: req.method,
     path: req.url,
   });
 });

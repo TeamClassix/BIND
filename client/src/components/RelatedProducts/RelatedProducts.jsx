@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 
 // eslint-disable-next-line import/extensions, import/no-unresolved
-import RelatedProductsContext from '#contexts/RelatedProducts';
+import { RelatedProductsContext } from '#contexts';
 import PreviewList from './PreviewList';
 
 const RelatedProducts = () => {
