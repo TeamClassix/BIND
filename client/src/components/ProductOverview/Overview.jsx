@@ -35,43 +35,41 @@ const Overview = () => {
         ID: mainID,
       },
     })
-      .then((response)=> {
+      .then((response) => {
         console.log(response.data, 'should be all id');
         setProductInfo(response.data);
       })
-      .catch((error)=> {
+      .catch((error) => {
         console.log(error);
       });
   }, []);
 
 
 
-  const Button = styled.button`
-  background: transparent;
-  border-radius: 3px;
-  border: 2px solid palevioletred;
-  color: palevioletred;
-  margin: 0.5em 1em;
-  padding: 0.25em 1em;
+  //   const Button = styled.button`
+  //   background: transparent;
+  //   border-radius: 3px;
+  //   border: 2px solid palevioletred;
+  //   color: palevioletred;
+  //   margin: 0.5em 1em;
+  //   padding: 0.25em 1em;
 
-  ${props => props.primary && css`
-    background: palevioletred;
-    color: white;
-  `}
-`;
+  //   ${props => props.primary && css`
+  //     background: palevioletred;
+  //     color: white;
+  //   `}
+  // `;
 
-  const Container = styled.div`
-  text-align: center;
-`
-
-  // https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/
+  //   const Container = styled.div`
+  //   text-align: center;
+  // `
 
 
-  //access token
-  //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
   return (
     <>
-
+      <div>
+        share buttons
+      </div>
 
       <div>
         <StyleSelect info={mainID} />
