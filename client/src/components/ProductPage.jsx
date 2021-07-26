@@ -19,21 +19,11 @@ const ContainerDiv = styled.div`
 const getProductInfo = async (id) => {
   try {
     const productInfo = await axios(`/api/products/${id}`);
-    return [null, productInfo];
+    return [null, productInfo.data.data];
   } catch (e) {
     return [e.response.status];
   }
 };
-    // setErrState({
-    //   statusCode: e.response.status,
-    // });
-  // }
-  // console.log(useAppState);
-  // setAppState({
-  //   ...useAppState,
-  //   loading: false,
-  // });
-
 
 const ProductPage = ({ appState, errState }) => {
   const [useAppState, setAppState] = appState;
