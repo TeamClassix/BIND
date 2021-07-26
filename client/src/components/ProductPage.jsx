@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import ProductOverview from './ProductOverview/Overview';
 import RelatedProducts from './RelatedProducts/RelatedProducts';
-import QuestionsAnswers from './QandA/QandA';
+import QuestionsAnswers from './QandA/App';
 import RatingsReviews from './RatingsReviews/RatingsReviews';
 import ErrorPage from './ErrorPage';
 // import { AppContext } from '#contexts';
