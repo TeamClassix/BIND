@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TeamClassix/FECcapstone.git"
+    "url": "git+https://github.com/TeamClassix/BIND.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/TeamClassix/FECcapstone/issues"
+    "url": "https://github.com/TeamClassix/BIND/issues"
   },
-  "homepage": "https://github.com/TeamClassix/FECcapstone#readme",
+  "homepage": "https://github.com/TeamClassix/BIND#readme",
   "devDependencies": {
     "@babel/core": "^7.14.8",
     "@babel/preset-env": "^7.14.8",
@@ -49,6 +49,7 @@
     "#models": "./server/models/index.js",
     "#helpers": "./server/helpers/index.js",
     "#components/*": "./client/src/components/*",
-    "#helpers/*": "./client/src/helpers/*"
+    "#helpers/*": "./client/src/helpers/*",
+    "#contexts/*": "./client/src/contexts/*"
   }
 }
