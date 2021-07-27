@@ -13,22 +13,6 @@ const Overview = () => {
 
   const [productInfo, setProductInfo] = useState({});
 
-
-  // useEffect(() => {
-  //   axios.get('/cheese', {
-  //     params: {
-  //       ID: mainID,
-  //     },
-  //   })
-  //     .then((response)=> {
-  //       console.log(response.data, 'should be all data');
-  //     })
-  //     .catch((error)=> {
-  //       console.log(error);
-  //     });
-  // }, []);
-
-
   useEffect(() => {
     axios.get('/bees', {
       params: {
@@ -43,7 +27,6 @@ const Overview = () => {
         console.log(error);
       });
   }, []);
-
 
 
   //   const Button = styled.button`
