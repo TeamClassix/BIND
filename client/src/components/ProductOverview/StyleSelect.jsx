@@ -11,16 +11,14 @@ const StyleSelect = (props) => {
 
 
   useEffect(() => {
-    axios.get('/dees', {
-      params: {
-        ID: props.info,
-      },
+    axios.get(`/api/products/${props.info}/styles`, {
+      params: {},
     })
       .then((response) => {
-        console.log(response.data);
-        setAllStyle(response.data);
-        setCurrentStyle(response.data.results[0]);
-
+        console.log('soup', response.data.data);
+        setAllStyle(response.data.data);
+        console.log('here >>>>', response.data.data);
+        setCurrentStyle(response.data.data.results[0]);
       })
       .catch((error) => {
         console.error(error);
@@ -52,7 +50,7 @@ const StyleSelect = (props) => {
 
     //we need to map buttons
 
-    console.log(allStyle.results[0].photos[0].thumbnail_url, 'allStyle');
+    // console.log(allStyle.results[0].photos[0].thumbnail_url, 'allStyle');
 
     console.log(currentStyle, 'should be the current style');
 

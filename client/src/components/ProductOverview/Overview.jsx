@@ -30,10 +30,7 @@ const Overview = () => {
 
 
   useEffect(() => {
-    axios.get('/bees', {
-      params: {
-        ID: mainID,
-      },
+    axios.get(`/products/${mainID}`, {
     })
       .then((response)=> {
         console.log(response.data, 'should be all id');

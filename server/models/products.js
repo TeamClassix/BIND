@@ -1,5 +1,5 @@
 module.exports = {
-  get: (url, params) => {
-    console.log(url, params);
+  get: () => {
+    // console.log(url, params);
   },
 };
