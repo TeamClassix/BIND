@@ -12,23 +12,10 @@ const StyleSelect = (props) => {
       params: {},
     })
       .then((response) => {
-<<<<<<< HEAD
         console.log('soup', response.data.data);
         setAllStyle(response.data.data);
         console.log('here >>>>', response.data.data);
         setCurrentStyle(response.data.data.results[0]);
-=======
-        console.log('we are in line 21');
-        console.timeLog('test');
-        console.log(response.data, 'the styles');
-        setCurrentStyle(response.data.results[0]);
-        return response;
-      })
-      .then((response)=>{
-        setAllStyle(response.data);
-
-        console.log('next point');
->>>>>>> e05fa3e63b92d0afc149293207542b20966b0567
       })
       .catch((error) => {
         console.error(error);
@@ -39,7 +26,6 @@ const StyleSelect = (props) => {
     console.log('line 50 styleSelect');
     console.timeLog('test');
     return null;
-<<<<<<< HEAD
   } else {
 
     //we need to map buttons
@@ -53,13 +39,11 @@ const StyleSelect = (props) => {
         <div>styledile</div>
         <img src={allStyle.results[0].photos[0].thumbnail_url} alt="test" />
 
-        <Carousel />
+        {/* <Carousel /> */}
 
       </>
     )
 
-=======
->>>>>>> e05fa3e63b92d0afc149293207542b20966b0567
   }
   // we need to map buttons
 
