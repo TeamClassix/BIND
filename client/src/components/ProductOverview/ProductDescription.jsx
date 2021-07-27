@@ -2,11 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 
 const ProductDescription = (data) => {
-
   //should destructure the info from data
-  const {info} = data;
-
-
+  // const { info } = data;
 
   console.log(data, 'the end');
 
@@ -19,18 +16,19 @@ const ProductDescription = (data) => {
           <li>{oneFeat.value}</li>
         </>
       )
-
     }
     );
   } else {
     feats = null;
   }
 
-
   return (
     <>
       <div>Name: {data.info.name}</div>
-      <div>Description: {data.info.description}</div>
+      <div>
+        Description:
+        {data.info.description}
+      </div>
       <div>
         Slogan:
         {data.info.slogan}
