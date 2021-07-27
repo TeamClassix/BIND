@@ -4,13 +4,15 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
 } from 'react-router-dom';
 // Components
 import Header from './Header/Header';
 import SiteMessage from './SiteMessage/SiteMessage';
 import Footer from './Footer/Footer';
 import ProductPage from './ProductPage';
+import LandingPage from './LandingPage/LandingPage';
+// eslint-disable-next-line import/no-unresolved
 import { AppContext } from '#contexts';
 
 const MainContainer = styled.div`
@@ -43,6 +45,7 @@ const App = () => {
           </Route>
           <Route path="/">
             <MainContainer>
+              <LandingPage />
               <Link to="/someslug/25167">Go To Sample Page</Link>
             </MainContainer>
           </Route>
@@ -50,7 +53,7 @@ const App = () => {
         <Footer />
       </AppContext.Provider>
     </Router>
-  )
+  );
 };
 
 export default App;
