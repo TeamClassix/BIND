@@ -13,7 +13,7 @@ const StyleSelect = (props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   //working
 
-
+  console.log('in styleselect');
   const Dive = styled.div`
   right: 500px;
   position: absolute;
@@ -24,49 +24,27 @@ const StyleSelect = (props) => {
       params: {},
     })
       .then((response) => {
-        console.log('we are in line 21');
-        console.timeLog('test');
-        console.log(response.data, 'the styles');
-        setCurrentStyle(response.data.results[0]);
-        setCurrentIndex(0);
+        // console.log('we are in line 21');
+        // console.timeLog('test');
+        // console.log(response.data, 'the styles');
+        // setCurrentStyle(response.data.results[0]);
+        // setCurrentIndex(0);
+        setCurrentStyle(response.data.data.results[0]);
+
         return response;
       })
       .then((response) => {
-        setAllStyle(response.data);
+        // setAllStyle(response.data);
         console.log('next point');
-        // console.log('soup', response.data.data);
-        // setAllStyle(response.data.data);
-        // console.log('here >>>>', response.data.data);
-        // setCurrentStyle(response.data.data.results[0]);
+        console.log('soup', response.data.data);
+        setAllStyle(response.data.data);
+        console.log('here >>>>', response.data.data);
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
 
-  if (allStyle === null) {
-    console.log('line 50 styleSelect');
-    console.timeLog('test');
-    return null;
-  } else {
-
-    //we need to map buttons
-
-    // console.log(allStyle.results[0].photos[0].thumbnail_url, 'allStyle');
-
-    console.log(currentStyle, 'should be the current style');
-
-    return (
-      <>
-        <div>styledile</div>
-        <img src={allStyle.results[0].photos[0].thumbnail_url} alt="test" />
-
-        {/* <Carousel /> */}
-
-      </>
-    )
-
-  }
 
   const currentStyleChangeButton = (event) => {
     // console.log(event.target.attributes[0].value);
@@ -90,6 +68,15 @@ const StyleSelect = (props) => {
   };
 
 
+  if (allStyle === null) {
+    console.timeLog('null allstyle');
+
+    console.log('line 50 styleSelect');
+
+    return null;
+  }
+
+
   let styleButtons;
   if (currentZoom === 2) {
     styleButtons = null;
@@ -103,7 +90,6 @@ const StyleSelect = (props) => {
       )
     });
   }
-
 
 
   return (
@@ -131,9 +117,4 @@ const StyleSelect = (props) => {
 
 export default StyleSelect;
 
-
 // const Butt = styled.button`
-
-// `;
-
-
