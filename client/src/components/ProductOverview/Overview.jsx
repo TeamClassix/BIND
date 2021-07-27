@@ -14,14 +14,11 @@ const Overview = () => {
   const [productInfo, setProductInfo] = useState({});
 
   useEffect(() => {
-    axios.get('/bees', {
-      params: {
-        ID: mainID,
-      },
+    axios.get(`/api/products/${mainID}`, {
     })
       .then((response) => {
         console.log(response.data, 'should be all id');
-        setProductInfo(response.data);
+        setProductInfo(response.data.data);
       })
       .catch((error) => {
         console.log(error);
@@ -46,7 +43,7 @@ const Overview = () => {
   //   const Container = styled.div`
   //   text-align: center;
   // `
-
+  console.log('ddddd', productInfo);
 
   return (
     <>

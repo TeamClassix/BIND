@@ -21,3 +21,4 @@ node_modules/
 
 # Bundled files
 client/dist/bundle.js
+client/dist/bundle.js*

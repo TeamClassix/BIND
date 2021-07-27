@@ -1,12 +1,11 @@
 const express = require('express');
 // eslint-disable-next-line import/no-unresolved
-const Models = require('#models');
+// const Models = require('#models');
 
 const router = express.Router({ mergeParams: true });
 
 router.use((req, res, next) => {
   process.stdout.write('Controller: /api/products\n');
-  console.log(Models.products.get);
   next();
 });
 

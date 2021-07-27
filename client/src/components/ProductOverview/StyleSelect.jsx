@@ -20,10 +20,8 @@ const StyleSelect = (props) => {
 `;
 
   useEffect(() => {
-    axios.get('/dees', {
-      params: {
-        ID: props.info,
-      },
+    axios.get(`/api/products/${props.info}/styles`, {
+      params: {},
     })
       .then((response) => {
         console.log('we are in line 21');
@@ -36,6 +34,10 @@ const StyleSelect = (props) => {
       .then((response) => {
         setAllStyle(response.data);
         console.log('next point');
+        // console.log('soup', response.data.data);
+        // setAllStyle(response.data.data);
+        // console.log('here >>>>', response.data.data);
+        // setCurrentStyle(response.data.data.results[0]);
       })
       .catch((error) => {
         console.error(error);
@@ -46,6 +48,24 @@ const StyleSelect = (props) => {
     console.log('line 50 styleSelect');
     console.timeLog('test');
     return null;
+  } else {
+
+    //we need to map buttons
+
+    // console.log(allStyle.results[0].photos[0].thumbnail_url, 'allStyle');
+
+    console.log(currentStyle, 'should be the current style');
+
+    return (
+      <>
+        <div>styledile</div>
+        <img src={allStyle.results[0].photos[0].thumbnail_url} alt="test" />
+
+        {/* <Carousel /> */}
+
+      </>
+    )
+
   }
 
   const currentStyleChangeButton = (event) => {
