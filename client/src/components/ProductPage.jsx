@@ -62,10 +62,10 @@ const ProductPage = ({ appState, errState }) => {
           ? <ErrorPage setErrState={setErrState} statusCode={useErrState.statusCode} />
           : (
             <>
-              <ProductOverview />
-              <RelatedProducts />
-              <QuestionsAnswers />
-              <RatingsReviews />
+              <ProductOverview productId={id} />
+              <RelatedProducts productId={id} />
+              <QuestionsAnswers productId={id} />
+              <RatingsReviews productId={id} />
             </>
           ))
       }
