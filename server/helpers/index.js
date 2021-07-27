@@ -11,7 +11,6 @@ const getCatName = function (callback, id) {
     callback([{ name: 'null' }]);
   } else {
 
-
     connection.query(`SELECT name FROM categories WHERE id=${id}`, function (error, results, fields) {
       if (error) {
         console.log(error);
@@ -34,5 +33,3 @@ module.exports = {
   updateCategory,
   getCatName
 };
-
-

@@ -23,7 +23,7 @@ const ProductDescription = (data) => {
   }
 
   return (
-    <>
+    <div className="products">
       <div>Name: {data.info.name}</div>
       <div>
         Description:
@@ -35,7 +35,7 @@ const ProductDescription = (data) => {
       </div>
 
       {feats}
-    </>
+    </div>
   )
 
 }
