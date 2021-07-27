@@ -30,6 +30,7 @@ const ProductPage = ({ appState, errState }) => {
   const [useErrState, setErrState] = errState;
   const { id } = useParams();
   useEffect(async () => {
+    console.log(useAppState.loading);
     const productInfo = await getProductInfo(id);
     setAppState({
       ...useAppState,
@@ -41,6 +42,13 @@ const ProductPage = ({ appState, errState }) => {
       setErrState({ statusCode: productInfo[0] });
     }
   }, []);
+  useEffect(() => () => {
+    setAppState({
+      ...useAppState,
+      loading: true,
+    });
+  }, []);
+
   return (
     <ContainerDiv>
       {
