@@ -74,17 +74,15 @@ const getReviewsMeta = async (id) => {
   } catch (e) {
     return [e];
   }
-}
+};
 
 const ProductTile = ({ data }) => {
-  // console.log(data);
-  // console.log(nameToSlug(data.name));
+  const { name, id, default_price: price, category } = data;
   const [imageUrl, setImageUrl] = useState(null);
   const [rating, setRating] = useState({
     avg: 0,
     count: 0,
   });
-  const { name, id, default_price: price, category } = data;
   useEffect(async () => {
     const [err, styleData] = await getImage(id);
     if (err || !styleData.results.length) return;
@@ -99,7 +97,6 @@ const ProductTile = ({ data }) => {
   useEffect(async () => {
     const [err, { ratings }] = await getReviewsMeta(id);
     if (err) return;
-    console.log(ratings);
     const values = Object.keys(ratings);
     let total = 0;
     let count = 0;
@@ -107,7 +104,6 @@ const ProductTile = ({ data }) => {
       total += Number(value) * Number(ratings[value]);
       count += Number(ratings[value]);
     });
-    console.log({ total, count });
     const avg = total / count;
     setRating({
       avg,
@@ -128,12 +124,21 @@ const ProductTile = ({ data }) => {
         </TitleDiv>
         <SmallText>${price}</SmallText>
         <StarsDiv>
-          <i className="fas fa-star" />
-          <i className="fas fa-star" />
-          <i className="fas fa-star" />
-          <i className="fas fa-star-half-alt" />
-          <i className="far fa-star" />
-          ({ rating.count })
+          {!rating.count
+            ? 'No Reviews Yet'
+            : (
+              <>
+                {
+                  // Array(3).fill(<i className="fas fa-star" />)
+                  // Array(3).fill(<i className="fas fa-star" />)
+                }
+                {/* <i className="fas fa-star" />
+                <i className="fas fa-star" />
+                <i className="fas fa-star-half-alt" />
+                <i className="far fa-star" />
+                ({ rating.count }) */}
+              </>
+            )}
         </StarsDiv>
       </ProductDetailsDiv>
     </OuterDiv>
