@@ -15,7 +15,6 @@ const BigPicture = (props) => {
 
   let xZoom = ((100 * ratio.x / ratio.tinyImageWidth)) + '';
   let yZoom = ((100 * ratio.y / ratio.tinyImageHeight)) + '';
-  console.log(xZoom, yZoom, 'hello');
 
   const ZoomImage = styled.img`
   object-position: ${xZoom}% ${yZoom}%;
@@ -39,29 +38,29 @@ ${something => props.currentZoom === 2 && css`
   `;
 
   const RightArrow = styled.span`
-  color: red;
-right:0%;
+    color: red;
+    right:0%;
 
   `;
 
   const Container = styled.div`
-  position: relative;
-  ${something => props.currentZoom === 1 && css`
-  cursor: zoom-in;
-  width:50%;
+    position: relative;
+    ${something => props.currentZoom === 1 && css`
+    cursor: zoom-in;
+    width:50%;
   `
     }
 
-${something => props.currentZoom === 2 && css`
-cursor: zoom-in;
-width:100%;
+  ${something => props.currentZoom === 2 && css`
+    cursor: zoom-in;
+    width:100%;
 `
     }
 `;
 
 
 
-
+  //possible exploration of a way to append something to a div but was not sure if this was a working solution
   const fiddle = new Image();
   // fiddle.onload = function() {
   //   alert(this.width + 'x' + this.height);
@@ -69,17 +68,7 @@ width:100%;
   fiddle.src = props.imgURL;
   // document.body.appendChild(fiddle);
 
-  // background: ${props => props.primary ? "palevioletred" : "white"};
-  let lense = [];
-  //this is creating an error
-  if (ratio !== null) {
 
-    // object-position: ${(ratio.actWidth * (ratio.x / ratio.tinyImageWidth))+''}px ${(ratio.actHeight * (ratio.y / ratio.tinyImageHeight))+''}px;
-
-
-
-    console.log(ratio, (ratio.actHeight * (ratio.y / ratio.tinyImageHeight)), 'the raio');
-  }
   return (
     <>
       <Container>

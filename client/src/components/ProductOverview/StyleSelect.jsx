@@ -85,7 +85,6 @@ border: 5px solid black;
     styleButtons = null;
   } else {
     styleButtons = allStyle.results.map((eachStyle, index) => {
-      console.log(index, 'each style structure');
       if (((index+1)%4)===0) {
         return (
           <>
