@@ -12,6 +12,7 @@ const FooterDiv = styled.div`
   color: #fff;
   font-size: 0.8em;
   padding: 25px;
+  margin-top: 25px;
 `;
 const FooterMenusDiv = styled.div`
   display: flex;
