@@ -6,7 +6,7 @@ import axios from 'axios';
 const OuterDiv = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid gray;
+  border: 1px solid #333333;
   flex: 0 0 22%;
   align-items: center;
   margin-top: 40px;
@@ -15,21 +15,22 @@ const ProductImageDiv = styled.div`
   display: flex;
 `;
 const ProductDetailsDiv = styled.div`
-  background-color: #444444;
-  color: #fff;
+  background-color: #c6cfb7;
+  color: #545454;
   width: 100%;
   box-sizing: border-box;
   padding: 10px;
+  border-top: 1px solid #333333;
 `;
 const SmallText = styled.div`
   text-transform: uppercase;
   font-size: 0.7em;
-  margin-bottom: 7px;
+  margin-bottom: 6px;
 `;
 const TitleLink = styled(Link)`
   font-weight: bold;
   text-decoration: none;
-  color: #fff;
+  color: #3c3c3c;
 `;
 const TitleDiv = styled.div`
   margin-bottom: 7px;
@@ -74,6 +75,22 @@ const getReviewsMeta = async (id) => {
   } catch (e) {
     return [e];
   }
+};
+
+const ratingToStars = (avg) => {
+  let fullStars = Math.floor(avg);
+  let halfStars = 0;
+  const remainder = avg - fullStars;
+  if (remainder >= 0.75) {
+    fullStars += 1;
+  } else if (remainder >= 0.25) {
+    halfStars += 1;
+  }
+  const emptyStars = 5 - fullStars - halfStars;
+  let starSet = new Array(fullStars).fill(<i className="fas fa-star" />);
+  starSet = starSet.concat(new Array(halfStars).fill(<i className="fas fa-star-half-alt" />));
+  starSet = starSet.concat(new Array(emptyStars).fill(<i className="far fa-star" />));
+  return starSet;
 };
 
 const ProductTile = ({ data }) => {
@@ -128,15 +145,8 @@ const ProductTile = ({ data }) => {
             ? 'No Reviews Yet'
             : (
               <>
-                {
-                  // Array(3).fill(<i className="fas fa-star" />)
-                  // Array(3).fill(<i className="fas fa-star" />)
-                }
-                {/* <i className="fas fa-star" />
-                <i className="fas fa-star" />
-                <i className="fas fa-star-half-alt" />
-                <i className="far fa-star" />
-                ({ rating.count }) */}
+                <div>{ratingToStars(rating.avg)}</div>
+                <div>({rating.avg.toFixed(2)})</div>
               </>
             )}
         </StarsDiv>
