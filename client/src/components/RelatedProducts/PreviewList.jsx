@@ -1,6 +1,7 @@
 import React from 'react';
 
 const PreviewList = ({ title, list }) => {
+  // /products/:product_id/related
   console.log('stop');
   return (
     <div>
