@@ -67,7 +67,7 @@ const ProductPage = () => {
           : (
             <>
               <ProductOverview productId={id} />
-              <RelatedProducts productId={id} />
+              <RelatedProducts />
               <QuestionsAnswers productId={id} />
               <RatingsReviews productId={id} />
             </>
