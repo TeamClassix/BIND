@@ -3,30 +3,17 @@ import styled, { css } from 'styled-components';
 import axios from 'axios';
 import ProductDescription from './ProductDescription.jsx';
 import StyleSelect from './StyleSelect.jsx';
+import { AppContext } from '#contexts';
 
 
 
-const Overview = () => {
+const Overview = (props) => {
   const [mainID, setmainID] = useState(25167);
 
+  const [meta, setMeta] = useState(null);
   //25168 has no images at all
 
   const [productInfo, setProductInfo] = useState({});
-
-
-  // useEffect(() => {
-  //   axios.get('/cheese', {
-  //     params: {
-  //       ID: mainID,
-  //     },
-  //   })
-  //     .then((response)=> {
-  //       console.log(response.data, 'should be all data');
-  //     })
-  //     .catch((error)=> {
-  //       console.log(error);
-  //     });
-  // }, []);
 
 
   useEffect(() => {
@@ -43,24 +30,7 @@ const Overview = () => {
 
 
 
-  //   const Button = styled.button`
-  //   background: transparent;
-  //   border-radius: 3px;
-  //   border: 2px solid palevioletred;
-  //   color: palevioletred;
-  //   margin: 0.5em 1em;
-  //   padding: 0.25em 1em;
 
-  //   ${props => props.primary && css`
-  //     background: palevioletred;
-  //     color: white;
-  //   `}
-  // `;
-
-  //   const Container = styled.div`
-  //   text-align: center;
-  // `
-  console.log('ddddd', productInfo);
 
   return (
     <>
@@ -69,7 +39,7 @@ const Overview = () => {
       </div>
 
       <div>
-        <StyleSelect info={mainID} />
+        <StyleSelect info={mainID} productInfo={productInfo} />
       </div>
 
       <div>Display Thing</div>

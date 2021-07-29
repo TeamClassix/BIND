@@ -34,4 +34,8 @@ body {
 
 
 
-/* left: 100px */
+
+.img-zoom-container {
+  position: relative;
+}
+
