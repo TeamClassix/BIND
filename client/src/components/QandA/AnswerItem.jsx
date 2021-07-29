@@ -1,7 +1,7 @@
 import React from 'react';
 
 const AnswerItem = () => (
-  <div>Answer Item</div>
+  <div>A:</div>
 );
 
 export default AnswerItem;
