@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { RelatedProductsContext } from '#contexts';
 import PreviewList from './PreviewList';
 
-const RelatedProducts = () => {
+const RelatedProducts = ({ productId }) => {
   const [useRPState, setRPState] = useState({
     related: [],
     outfit: [],
