@@ -30,7 +30,6 @@ const ProductPage = ({ appState, errState }) => {
   const [useErrState, setErrState] = errState;
   const { id } = useParams();
   useEffect(async () => {
-    console.log(useAppState.loading);
     const productInfo = await getProductInfo(id);
     setAppState({
       ...useAppState,
