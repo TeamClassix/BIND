@@ -97,7 +97,7 @@ ${something => props.currentZoom === 2 && css`
 
         <Sty onClick={() => { props.zoomClick() }} id="BigPicture" src={props.imgURL} alt="Large" />
         <br />
-        <span tabIndex="0" role="button" className="prev" onClick={() => (console.log('previous button clicked'))}>&#10094;</span>
+        <span tabIndex="0" role="button" className="prev" onClick={(event) => { props.increment(event, -1); }}>&#10094;</span>
         <RightArrow tabIndex="-1" role="button" className="next" onClick={(event) => { props.increment(event, 1); }}>&#10095;</RightArrow>
 
       </Container>

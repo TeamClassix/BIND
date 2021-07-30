@@ -40,7 +40,7 @@ const Overview = (props) => {
       </div>
 
       <fieldset style={{"width":"0px"}}>
-      <div class="fb-share-button" data-href="http://localhost:5000/someslug/25167" data-layout="box_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A5000%2Fsomeslug%2F25167&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"><em>Share on Facebook</em></a></div>
+      <div className="fb-share-button" data-href="http://localhost:5000/someslug/25167" data-layout="box_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A5000%2Fsomeslug%2F25167&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"><em>Share on Facebook</em></a></div>
       </fieldset>
       <div>
         <StyleSelect info={intProps} productInfo={productInfo} />
