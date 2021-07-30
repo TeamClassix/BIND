@@ -76,12 +76,17 @@ const RightMenu = (props) => {
     }
   }
 
+  if (props.currentZoom===2||props.currentZoom===3) {
+    return null
+  }
+
   return (
     <>
       {stars}
+      <h1>Name: {props.upper.name}</h1>
+
       <div>Category: {props.upper.category} </div>
 
-      <div>Name: {props.upper.name}</div>
 
       <div>current style: {props.currentStyle.name}</div>
       <div>Price: {props.upper.default_price}</div>

@@ -81,7 +81,7 @@ border: 5px solid black;
   }
 
   let styleButtons;
-  if (currentZoom === 2) {
+  if (currentZoom === 2 || currentZoom === 3) {
     styleButtons = null;
   } else {
     styleButtons = allStyle.results.map((eachStyle, index) => {

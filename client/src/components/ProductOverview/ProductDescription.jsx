@@ -11,8 +11,7 @@ const ProductDescription = (data) => {
     feats = data.info.features.map((oneFeat) => {
       return (
         <>
-          <li>{oneFeat.feature}</li>
-          <li>{oneFeat.value}</li>
+          <li>{oneFeat.feature} : {oneFeat.value}</li>
         </>
       )
     }
