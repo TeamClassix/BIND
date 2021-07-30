@@ -22,26 +22,25 @@ const MainContainer = styled.div`
 `;
 
 const App = () => {
+  const idState = useState(null);
   const appState = useState({
-    id: null,
     loading: true,
   });
-  const errState = useState({
-    statusCode: null,
-  });
+  const errState = useState(null);
   return (
     <Router>
       <AppContext.Provider
         value={{
           appState,
           errState,
+          idState,
         }}
       >
         <Header />
         <SiteMessage />
         <Switch>
           <Route path="/:slug/:id([0-9]{3,7})">
-            <ProductPage appState={appState} errState={errState} />
+            <ProductPage />
           </Route>
           <Route path="/">
             <MainContainer>
