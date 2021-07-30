@@ -7,7 +7,13 @@ const RightMenu = (props) => {
   const [quantity, setQuantity] = useState("Select");
   const [reviewAvg, setReviewAvg] = useState(0);
 
-  console.log(cats, 'this should be cats changing');
+
+  const iconStyle = styled.i`
+  background-color: tomato;
+  border: double;
+
+`;
+
 
   useEffect(() => {
     axios.get(`/api/reviews/meta?product_id=${props.info}`, {
@@ -41,8 +47,7 @@ const RightMenu = (props) => {
     sizes.push(props.currentStyle.skus[sku]);
   }
 
-  console.log(sizes, 'should be the sizes')
-
+  // these are where sizes are listed
   let optsize = sizes.map((siz) => {
     if (siz.quantity === 0) {
       return null;
@@ -64,7 +69,6 @@ const RightMenu = (props) => {
     }
   }
 
-  console.log(reviewAvg, 'the avg');
   let stars = [];
   for (let star = 0.5; star < 5.5; star += 1) {
     if (star < reviewAvg && star < Math.floor(reviewAvg)) {
@@ -76,12 +80,20 @@ const RightMenu = (props) => {
     }
   }
 
+  if (props.currentZoom === 2 || props.currentZoom === 3) {
+    return null
+  }
+
   return (
     <>
+      <span style={{"color": "Dodgerblue"}}>
       {stars}
+      </span>
+
+      <h1>Name: {props.upper.name}</h1>
+
       <div>Category: {props.upper.category} </div>
 
-      <div>Name: {props.upper.name}</div>
 
       <div>current style: {props.currentStyle.name}</div>
       <div>Price: {props.upper.default_price}</div>
@@ -93,12 +105,7 @@ const RightMenu = (props) => {
             {optsize}
           </select>
         </label>
-        <input type="submit" value="Submit" />
-      </form>
-
-
-
-      <form onSubmit={() => { console.log('submitted') }}>
+        <br></br>
         <label>
           Pick your favorite flavor:
           <select value={quantity} onChange={(event) => { setQuantity((event.target.value)) }}>
@@ -106,12 +113,14 @@ const RightMenu = (props) => {
             {quant}
           </select>
         </label>
-        <input type="submit" value="Submit" />
+
+        <input type="submit" value="Add to Cart" />
       </form>
 
-      <button>add to cart</button>
 
-      <i className="fas fa-star"></i>
+      <span style={{"color": "Dodgerblue"}}>
+        <i onClick={()=>console.log('this should change favorites')}class="fas fa-star"></i>
+      </span>
       <br></br>
 
     </>

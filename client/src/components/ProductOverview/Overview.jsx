@@ -6,9 +6,13 @@ import StyleSelect from './StyleSelect.jsx';
 import { AppContext } from '#contexts';
 
 
+const ThemeContext = React.createContext('light');
 
 const Overview = (props) => {
   const [mainID, setmainID] = useState(25167);
+
+  let intProps = parseInt(props.productId);
+  console.log(intProps, 'should be something here');
 
   const [meta, setMeta] = useState(null);
   //25168 has no images at all
@@ -28,18 +32,18 @@ const Overview = (props) => {
       });
   }, []);
 
-
-
-
-
+  //url is invalid
   return (
     <>
       <div>
         share buttons
       </div>
 
+      <fieldset style={{"width":"0px"}}>
+      <div className="fb-share-button" data-href="http://localhost:5000/someslug/25167" data-layout="box_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A5000%2Fsomeslug%2F25167&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"><em>Share on Facebook</em></a></div>
+      </fieldset>
       <div>
-        <StyleSelect info={mainID} productInfo={productInfo} />
+        <StyleSelect info={intProps} productInfo={productInfo} />
       </div>
 
       <div>Display Thing</div>
@@ -49,10 +53,7 @@ const Overview = (props) => {
       </div>
 
     </>
-  )
-
-}
-
-
+  );
+};
 
 export default Overview;
