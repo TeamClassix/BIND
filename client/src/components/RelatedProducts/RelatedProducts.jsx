@@ -38,17 +38,13 @@ const RelatedProducts = () => {
     const requests = relatedIds.map((relatedId) => createRequest(relatedId));
     try {
       const data = await axios.all(requests);
-      const parsed = data.map((item) => {
-        console.log('ok');
-        return item.data.data;
-      });
+      const parsed = data.map((item) => item.data.data);
       const results = [];
-      parsed.forEach((n, i) => {
+      parsed.forEach((n) => {
         if (results.findIndex((item) => item.id === n.id) < 0) {
           results.push(n);
         }
       });
-      console.log(results);
       setRelatedState(results);
     } catch (e) {
       console.log(e);

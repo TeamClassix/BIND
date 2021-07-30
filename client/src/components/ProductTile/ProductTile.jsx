@@ -10,13 +10,12 @@ const OuterDiv = styled.div`
   border: 1px solid #333333;
   flex: 0 0 22%;
   align-items: center;
-  margin-top: 40px;
+  background-color: #c6cfb7;
 `;
 const ProductImageDiv = styled.div`
   display: flex;
 `;
 const ProductDetailsDiv = styled.div`
-  background-color: #c6cfb7;
   color: #545454;
   width: 100%;
   box-sizing: border-box;
