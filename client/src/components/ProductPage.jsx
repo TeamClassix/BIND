@@ -8,6 +8,7 @@ import RelatedProducts from './RelatedProducts/RelatedProducts';
 import QuestionsAnswers from './QandA/App';
 import RatingsReviews from './RatingsReviews/RatingsReviews';
 import ErrorPage from './ErrorPage';
+// eslint-disable-next-line import/no-unresolved
 import { AppContext } from '#contexts';
 
 const ContainerDiv = styled.div`
@@ -27,7 +28,7 @@ const getProductInfo = async (id) => {
 
 const ProductPage = () => {
   const { appState, errState, idState } = useContext(AppContext);
-  console.log({appState, errState, idState})
+  console.log({appState, errState, idState});
 
   const [useAppState, setAppState] = appState;
   const [useErrState, setErrState] = errState;

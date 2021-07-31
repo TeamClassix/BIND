@@ -9,13 +9,19 @@ const RowDiv = styled.div`
 `;
 const ContainerDiv = styled.div`
   display: flex;
-  margin-top: 40px;
+  justify-content: space-between;
+`;
+const ControlDiv = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 275px;
+  z-index: 100;
 `;
 const LeftControlDiv = styled.div`
   color: #fff;
-  align-items: center;
   justify-content: center;
-  position: absolute;
   float: right;
   background-color: #0000006e;
   height: 415px;
@@ -32,13 +38,15 @@ const PreviewList = ({ title, list }) => {
       <h1>{title}</h1>
       <RowDiv>
         <ContainerDiv>
-          <LeftControlDiv onClick={() => console.log('test')}>
-            <i className="fas fa-chevron-left" />
-          </LeftControlDiv>
           {list.map((item, index) => index < 4 && <ProductTile key={item.id} data={item} />)}
-          <LeftControlDiv onClick={() => console.log('test')}>
-            <i className="fas fa-chevron-right" />
-          </LeftControlDiv>
+          <ControlDiv>
+            <LeftControlDiv onClick={() => console.log('test')}>
+              <i className="fas fa-chevron-left" />
+            </LeftControlDiv>
+            <LeftControlDiv onClick={() => console.log('test')}>
+              <i className="fas fa-chevron-right" />
+            </LeftControlDiv>
+          </ControlDiv>
         </ContainerDiv>
       </RowDiv>
     </div>

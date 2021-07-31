@@ -148,7 +148,7 @@ const ProductTile = ({ data }) => {
             : (
               <>
                 <div>{ratingToStars(rating.avg)}</div>
-                <div>{`(${rating.avg.toFixed(2)})`}</div>
+                {/* <div>{`(${rating.avg.toFixed(2)})`}</div> */}
               </>
             )}
         </StarsDiv>
