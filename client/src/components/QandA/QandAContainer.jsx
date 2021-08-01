@@ -1,25 +1,12 @@
 import React from 'react';
-import QandAItem from './QandAItem'
+import QandAItem from './QandAItem';
 
-class QandAContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-
-    };
-  }
-
-  render() {
-    return (
-      <div>
-        Q and A Container
-        <QandAItem />
-      </div>
-    );
-  }
-}
+const QandAContainer = ({ questions }) => (
+  <div>
+    {questions.map((question) => (
+      <QandAItem questions={question} answers={question.answers} />
+    ))}
+  </div>
+);
 
 export default QandAContainer;
-
-
-// contains q and a item

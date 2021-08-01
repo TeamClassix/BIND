@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { AppContext } from '#contexts';
 
 const OuterDiv = styled.div`
   display: flex;
@@ -9,13 +10,12 @@ const OuterDiv = styled.div`
   border: 1px solid #333333;
   flex: 0 0 22%;
   align-items: center;
-  margin-top: 40px;
+  background-color: #c6cfb7;
 `;
 const ProductImageDiv = styled.div`
   display: flex;
 `;
 const ProductDetailsDiv = styled.div`
-  background-color: #c6cfb7;
   color: #545454;
   width: 100%;
   box-sizing: border-box;
@@ -96,6 +96,8 @@ const ratingToStars = (avg) => {
 const ProductTile = ({ data }) => {
   const { name, id, default_price: price, category } = data;
   const [imageUrl, setImageUrl] = useState(null);
+  const { idState } = useContext(AppContext);
+  const [useIdState, setIdState] = idState;
   const [rating, setRating] = useState({
     avg: 0,
     count: 0,
@@ -129,7 +131,7 @@ const ProductTile = ({ data }) => {
   }, []);
   return (
     <OuterDiv>
-      <Link to={`${nameToSlug(name)}/${id}`}>
+      <Link onClick={() => setIdState(id)} to={`/${nameToSlug(name)}/${id}`}>
         <ProductImageDiv>
           <ProductImg alt="Filler" height="300px" width="100%" src={imageUrl || '/images/default.png'} />
         </ProductImageDiv>
@@ -137,7 +139,7 @@ const ProductTile = ({ data }) => {
       <ProductDetailsDiv>
         <SmallText>{category}</SmallText>
         <TitleDiv>
-          <TitleLink to={`${nameToSlug(name)}/${id}`}>{name}</TitleLink>
+          <TitleLink onClick={() => setIdState(id)} to={`/${nameToSlug(name)}/${id}`}>{name}</TitleLink>
         </TitleDiv>
         <SmallText>${price}</SmallText>
         <StarsDiv>
@@ -146,7 +148,7 @@ const ProductTile = ({ data }) => {
             : (
               <>
                 <div>{ratingToStars(rating.avg)}</div>
-                <div>({rating.avg.toFixed(2)})</div>
+                {/* <div>{`(${rating.avg.toFixed(2)})`}</div> */}
               </>
             )}
         </StarsDiv>

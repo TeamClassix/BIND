@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -8,7 +8,8 @@ import RelatedProducts from './RelatedProducts/RelatedProducts';
 import QuestionsAnswers from './QandA/App';
 import RatingsReviews from './RatingsReviews/RatingsReviews';
 import ErrorPage from './ErrorPage';
-// import { AppContext } from '#contexts';
+// eslint-disable-next-line import/no-unresolved
+import { AppContext } from '#contexts';
 
 const ContainerDiv = styled.div`
   width: 1180px;
@@ -25,18 +26,23 @@ const getProductInfo = async (id) => {
   }
 };
 
-const ProductPage = ({ appState, errState }) => {
+const ProductPage = () => {
+  const { appState, errState, idState } = useContext(AppContext);
+  console.log({appState, errState, idState});
+
   const [useAppState, setAppState] = appState;
   const [useErrState, setErrState] = errState;
+  const [useIdState, setIdState] = idState;
   const { id } = useParams();
   useEffect(async () => {
     const productInfo = await getProductInfo(id);
+    setIdState(Number(id));
     setAppState({
       ...useAppState,
       loading: false,
-      id,
       productInfo: productInfo[1],
     });
+
     if (productInfo[0]) {
       setErrState({ statusCode: productInfo[0] });
     }
@@ -57,12 +63,12 @@ const ProductPage = ({ appState, errState }) => {
         )
       }
       {
-        !useAppState.loading && (useErrState.statusCode
-          ? <ErrorPage setErrState={setErrState} statusCode={useErrState.statusCode} />
+        !useAppState.loading && (useErrState
+          ? <ErrorPage setErrState={setErrState} statusCode={useErrState} />
           : (
             <>
               <ProductOverview productId={id} />
-              <RelatedProducts productId={id} />
+              <RelatedProducts />
               <QuestionsAnswers productId={id} />
               <RatingsReviews productId={id} />
             </>

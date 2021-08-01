@@ -5,7 +5,6 @@ const ProductDescription = (data) => {
   //should destructure the info from data
   // const { info } = data;
 
-  console.log(data, 'the end');
 
   var feats;
   if (data.info.features) {
