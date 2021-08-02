@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
+import ZoomPlayground from './ZoomPlayground.jsx';
 
 
 const BigPicture = (props) => {
@@ -85,6 +86,7 @@ ${something => props.currentZoom === 2 && css`
       }} />
 
     <ZoomImage src={props.imgURL} onClick={() => { props.zoomClick() }}/>
+    <ZoomPlayground imgURL={props.imgURL}/>
       </>
 
 
