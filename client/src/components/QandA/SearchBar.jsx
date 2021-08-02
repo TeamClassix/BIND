@@ -1,10 +1,18 @@
 import React from 'react';
+// import styled from 'styled-components';
 
-const SearchBar = () => (
-  <form>
-    <input placeholder="Search for a question..." />
-    <button type="submit">Search</button>
-  </form>
+// const Button = styled.button`
+//   background: black,
+//   color: red
+// `;
+
+const SearchBar = ({ searchTerm }) => (
+  <div>
+        <form>
+          <input placeholder="Have a question? Search for answers…" onChange={searchTerm} />
+          <button type="submit">Search</button>
+        </form>
+  </div>
 );
 
 export default SearchBar;
