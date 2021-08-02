@@ -6,10 +6,11 @@ const router = express.Router();
 // /api
 // Treat API as 1:1 proxy
 router.use(async (req, res, next) => {
-  //what is this.  This is object destructing but also renaming the object to not have an underscore
+  // what is this.  This is object destructing
+  // but also renaming the object to not have an underscore
   const { _parsedUrl: parsedUrl } = req;
   try {
-    //await halts the rest of the function until the promise is resolved (ie does not go to next)
+    // await halts the rest of the function until the promise is resolved (ie does not go to next)
     const result = await axios({
       method: req.method,
       headers: {

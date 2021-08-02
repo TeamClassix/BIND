@@ -8,7 +8,7 @@ const OuterDiv = styled.div`
   display: flex;
   flex-direction: column;
   border: 1px solid #333333;
-  flex: 0 0 22%;
+  flex: 0 0 240px;
   align-items: center;
   background-color: #c6cfb7;
 `;

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 // import axios from 'axios';
 import styled from 'styled-components';
 // eslint-disable-next-line import/no-unresolved, import/extensions
@@ -10,45 +10,60 @@ const RowDiv = styled.div`
 const ContainerDiv = styled.div`
   display: flex;
   justify-content: space-between;
+  width: 100%;
 `;
 const ControlDiv = styled.div`
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 275px;
+  width: 1180px;
   z-index: 100;
+  display: flex;
+  justify-content: space-between;
 `;
 const LeftControlDiv = styled.div`
   color: #fff;
   justify-content: center;
-  float: right;
+  align-items: center;
   background-color: #0000006e;
-  height: 415px;
+  height: 402px;
   display: flex;
   width: 30px;
   cursor: pointer;
 `;
 
 const PreviewList = ({ title, list }) => {
+  const [rpStart, setRpStart] = useState(0);
+  console.log(rpStart);
+  const handleClick = (direction) => {
+    let newVal = rpStart + 4 * direction;
+    if (newVal < 0) newVal = 0;
+    if (newVal > list.length - 1) newVal = list.length - 1;
+    setRpStart(newVal);
+  };
   console.log(list);
   // /products/:product_id/related
   return (
     <div>
       <h1>{title}</h1>
-      <RowDiv>
-        <ContainerDiv>
-          {list.map((item, index) => index < 4 && <ProductTile key={item.id} data={item} />)}
-          <ControlDiv>
-            <LeftControlDiv onClick={() => console.log('test')}>
-              <i className="fas fa-chevron-left" />
-            </LeftControlDiv>
-            <LeftControlDiv onClick={() => console.log('test')}>
-              <i className="fas fa-chevron-right" />
-            </LeftControlDiv>
-          </ControlDiv>
-        </ContainerDiv>
-      </RowDiv>
+      {list.length
+        ? (
+          <RowDiv>
+            <ControlDiv>
+              <LeftControlDiv onClick={() => rpStart > 0 && handleClick(-1)}>
+                {rpStart > 0 && <i className="fas fa-chevron-left" />}
+              </LeftControlDiv>
+              <LeftControlDiv onClick={() => rpStart < list.length - 1 && handleClick(1)}>
+                {rpStart < list.length - 1 && <i className="fas fa-chevron-right" />}
+              </LeftControlDiv>
+            </ControlDiv>
+            <ContainerDiv>
+              {list.map((item, index) => (index >= rpStart) && (index < 4 + rpStart)
+              && <ProductTile key={item.id} data={item} />)}
+            </ContainerDiv>
+          </RowDiv>
+        )
+        : (
+          <div>No Results Found</div>
+        )}
     </div>
   );
 };
