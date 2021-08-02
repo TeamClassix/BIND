@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
+import ZoomPlayground from './ZoomPlayground.jsx';
 
 
 const BigPicture = (props) => {
@@ -18,8 +19,10 @@ const BigPicture = (props) => {
 
   const ZoomImage = styled.img`
   object-position: ${xZoom}% ${yZoom}%;
-  width: 300px;
+  width: 50%;
   object-fit: none;
+  cursor: zoom-out;
+
   `;
 
   const Sty = styled.img`
@@ -68,32 +71,38 @@ ${something => props.currentZoom === 2 && css`
   fiddle.src = props.imgURL;
   // document.body.appendChild(fiddle);
 
+  if (props.currentZoom===3) {
+    return (
+      <>
+      <img id="myimage" src={props.imgURL} width="50%" onClick={(event) => {
+        setRatio({
+          x: (event.pageX - event.target.offsetLeft),
+          y: (event.pageY - event.target.offsetTop),
+          actHeight: (event.target.attributes[1].ownerElement.naturalHeight),
+          actWidth: (event.target.attributes[1].ownerElement.naturalWidth),
+          tinyImageHeight: event.target.clientHeight,
+          tinyImageWidth: event.target.clientWidth
+        })
+      }} />
 
+    <ZoomImage src={props.imgURL} onClick={() => { props.zoomClick() }}/>
+    <ZoomPlayground imgURL={props.imgURL}/>
+      </>
+
+
+    )
+
+  }
   return (
     <>
       <Container>
 
         <Sty onClick={() => { props.zoomClick() }} id="BigPicture" src={props.imgURL} alt="Large" />
         <br />
-        <span tabIndex="0" role="button" className="prev" onClick={() => (console.log('previous button clicked'))}>&#10094;</span>
+        <span tabIndex="0" role="button" className="prev" onClick={(event) => { props.increment(event, -1); }}>&#10094;</span>
         <RightArrow tabIndex="-1" role="button" className="next" onClick={(event) => { props.increment(event, 1); }}>&#10095;</RightArrow>
 
       </Container>
-      <div>
-        <img id="myimage" src={props.imgURL} width="300" onClick={(event) => {
-          setRatio({
-            x: (event.pageX - event.target.offsetLeft),
-            y: (event.pageY - event.target.offsetTop),
-            actHeight: (event.target.attributes[1].ownerElement.naturalHeight),
-            actWidth: (event.target.attributes[1].ownerElement.naturalWidth),
-            tinyImageHeight: event.target.clientHeight,
-            tinyImageWidth: event.target.clientWidth
-          })
-        }} />
-
-      </div>
-      <ZoomImage src={props.imgURL} />
-
     </>
   );
 };
