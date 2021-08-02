@@ -1,10 +1,10 @@
 import React from 'react';
 import QandAItem from './QandAItem';
 
-const QandAContainer = ({ questions }) => (
+const QandAContainer = ({ questions, productName }) => (
   <div>
     {questions.map((question) => (
-      <QandAItem questions={question} answers={question.answers} />
+      <QandAItem questions={question} productName={productName} />
     ))}
   </div>
 );
