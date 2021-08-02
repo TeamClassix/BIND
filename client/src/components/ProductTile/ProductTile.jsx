@@ -4,11 +4,26 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { AppContext } from '#contexts';
 
+const ControlDiv = styled.div`
+  position: absolute;
+  display: flex;
+  align-self: flex-end;
+  color: #ffec66;
+  font-size: 1.5em;
+  margin-right: 20px;
+  margin-top: 20px;
+  flex-direction: column;
+  align-items: center;
+  & > * {
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+`;
 const OuterDiv = styled.div`
   display: flex;
   flex-direction: column;
   border: 1px solid #333333;
-  flex: 0 0 22%;
+  flex: 0 0 240px;
   align-items: center;
   background-color: #c6cfb7;
 `;
@@ -131,6 +146,14 @@ const ProductTile = ({ data }) => {
   }, []);
   return (
     <OuterDiv>
+      <ControlDiv>
+        <div className="add-to-outfit">
+          <i className="far fa-star" />
+        </div>
+        <div className="compare">
+          <i className="fas fa-not-equal" />
+        </div>
+      </ControlDiv>
       <Link onClick={() => setIdState(id)} to={`/${nameToSlug(name)}/${id}`}>
         <ProductImageDiv>
           <ProductImg alt="Filler" height="300px" width="100%" src={imageUrl || '/images/default.png'} />
@@ -148,7 +171,7 @@ const ProductTile = ({ data }) => {
             : (
               <>
                 <div>{ratingToStars(rating.avg)}</div>
-                <div>{`(${rating.avg.toFixed(2)})`}</div>
+                {/* <div>{`(${rating.avg.toFixed(2)})`}</div> */}
               </>
             )}
         </StarsDiv>
