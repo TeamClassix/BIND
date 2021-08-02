@@ -18,6 +18,7 @@ const ControlDiv = styled.div`
   z-index: 100;
   display: flex;
   justify-content: space-between;
+  pointer-events: none;
 `;
 const LeftControlDiv = styled.div`
   color: #fff;
@@ -28,6 +29,7 @@ const LeftControlDiv = styled.div`
   display: flex;
   width: 30px;
   cursor: pointer;
+  pointer-events: all;
 `;
 
 const PreviewList = ({ title, list }) => {
@@ -36,7 +38,7 @@ const PreviewList = ({ title, list }) => {
   const handleClick = (direction) => {
     let newVal = rpStart + 4 * direction;
     if (newVal < 0) newVal = 0;
-    if (newVal > list.length - 1) newVal = list.length - 1;
+    // if (newVal > list.length - 1) newVal = list.length;
     setRpStart(newVal);
   };
   console.log(list);
@@ -51,8 +53,8 @@ const PreviewList = ({ title, list }) => {
               <LeftControlDiv onClick={() => rpStart > 0 && handleClick(-1)}>
                 {rpStart > 0 && <i className="fas fa-chevron-left" />}
               </LeftControlDiv>
-              <LeftControlDiv onClick={() => rpStart < list.length - 1 && handleClick(1)}>
-                {rpStart < list.length - 1 && <i className="fas fa-chevron-right" />}
+              <LeftControlDiv onClick={() => rpStart + 4 < list.length - 1 && handleClick(1)}>
+                {rpStart + 4 < list.length - 1 && <i className="fas fa-chevron-right" />}
               </LeftControlDiv>
             </ControlDiv>
             <ContainerDiv>
