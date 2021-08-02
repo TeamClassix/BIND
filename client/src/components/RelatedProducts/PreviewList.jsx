@@ -34,14 +34,12 @@ const LeftControlDiv = styled.div`
 
 const PreviewList = ({ title, list }) => {
   const [rpStart, setRpStart] = useState(0);
-  console.log(rpStart);
   const handleClick = (direction) => {
     let newVal = rpStart + 4 * direction;
     if (newVal < 0) newVal = 0;
     // if (newVal > list.length - 1) newVal = list.length;
     setRpStart(newVal);
   };
-  console.log(list);
   // /products/:product_id/related
   return (
     <div>

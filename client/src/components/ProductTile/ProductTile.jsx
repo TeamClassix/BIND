@@ -4,6 +4,21 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { AppContext } from '#contexts';
 
+const ControlDiv = styled.div`
+  position: absolute;
+  display: flex;
+  align-self: flex-end;
+  color: #ffec66;
+  font-size: 1.5em;
+  margin-right: 20px;
+  margin-top: 20px;
+  flex-direction: column;
+  align-items: center;
+  & > * {
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+`;
 const OuterDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -131,6 +146,14 @@ const ProductTile = ({ data }) => {
   }, []);
   return (
     <OuterDiv>
+      <ControlDiv>
+        <div className="add-to-outfit">
+          <i className="far fa-star" />
+        </div>
+        <div className="compare">
+          <i className="fas fa-not-equal" />
+        </div>
+      </ControlDiv>
       <Link onClick={() => setIdState(id)} to={`/${nameToSlug(name)}/${id}`}>
         <ProductImageDiv>
           <ProductImg alt="Filler" height="300px" width="100%" src={imageUrl || '/images/default.png'} />
