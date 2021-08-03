@@ -28,11 +28,19 @@ const createRequest = (id) => (
 const RelatedProducts = () => {
   const [useRelatedState, setRelatedState] = useState([]);
   const [useOutfitState, setOutfitState] = useState([]);
+  const favoriteState = useState([]);
+  const [favorites, setFavorites] = favoriteState;
   const { idState } = useContext(AppContext);
   const [id, setIdState] = idState;
   // const rpContext = useContext(RelatedProductsContext);
 
   useEffect(async () => {
+    const cachedFavorites = localStorage.getItem('favorites');
+    if (cachedFavorites) {
+      setFavorites(JSON.parse(cachedFavorites));
+    } else {
+      localStorage.setItem('favorites', '[]');
+    }
     const [err, relatedIds] = await getRelatedProducts(id);
     if (err) return;
     const requests = relatedIds.map((relatedId) => createRequest(relatedId));
@@ -53,7 +61,7 @@ const RelatedProducts = () => {
     // const { name, id, default_price: price, category } = data;
   }, [id]);
   return (
-    <RelatedProductsContext.Provider value={useRelatedState}>
+    <RelatedProductsContext.Provider value={{ favoriteState, useRelatedState }}>
       <PreviewList title="Related Products" list={useRelatedState} />
       <PreviewList title="Your Outfit" list={useOutfitState} />
     </RelatedProductsContext.Provider>
