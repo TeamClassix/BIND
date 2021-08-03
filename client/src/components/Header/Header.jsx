@@ -16,7 +16,8 @@ const HeaderDiv = styled.div`
 const Logo = styled.div`
   font-weight: 800;
   font-size: 1.5em;
-  text-decoration: underline;
+  border: 2px solid #fff;
+  padding: 0 5px;
   text-transform: uppercase;
   &a:visited {
     color: #fff;
@@ -50,6 +51,7 @@ const StyledLink = styled(Link)`
   &:visited {
     color: #fff;
   }
+  text-decoration: none;
 `;
 
 const Header = () => (
