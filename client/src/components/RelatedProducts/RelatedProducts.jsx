@@ -30,6 +30,7 @@ const RelatedProducts = () => {
   const [useOutfitState, setOutfitState] = useState([]);
   const { idState } = useContext(AppContext);
   const [id, setIdState] = idState;
+  console.log(id, 'this is in relatedproducts')
   // const rpContext = useContext(RelatedProductsContext);
 
   useEffect(async () => {

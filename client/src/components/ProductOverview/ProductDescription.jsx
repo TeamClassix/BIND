@@ -2,26 +2,29 @@ import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 
 
+const FloatRight = styled.div`
+float: right;
+padding-right: 250px;
+
+
+`;
+
+const ProductDescriptionDiv = styled.div`
+position:relative;
+
+`;
+
 const ProductDescription = (data) => {
   //should destructure the info from data
   const { info } = data;
-  const FloatRight = styled.div`
-  float: right;
-  padding-right: 250px;
 
-  `;
-
-  const ProductDescriptionDiv = styled.div`
-  position:relative;
-
-  `;
 
 
   let feats;
   if (info.features) {
     feats = data.info.features.map((oneFeat) => (
       <>
-        <li>
+        <li key={oneFeat}>
           {oneFeat.feature}
           :
           {oneFeat.value}
@@ -34,9 +37,9 @@ const ProductDescription = (data) => {
 
   return (
     <>
-      <ProductDescriptionDiv>
-        <FloatRight>
-          <div>
+      <ProductDescriptionDiv key="ProductDescriptionDiv">
+        <FloatRight key="FloatRight">
+          <div className="Slogan">
             Slogan:
             {info.slogan}
           </div>

@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 const RightMenu = (props) => {
+  console.log(props, 'these are the props to pass in rightmenu')
   const [cats, setCats] = useState("Select");
   const [quantity, setQuantity] = useState("Select");
   const [reviewAvg, setReviewAvg] = useState(0);
@@ -161,7 +162,6 @@ const RightMenu = (props) => {
 
         <input type="submit" value="Add to Cart" />
       </form>
-
 
       {/* <form onSubmit={(event) => { console.log('submit') }}>
         <label>

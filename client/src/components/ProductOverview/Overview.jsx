@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled, { css } from 'styled-components';
 import axios from 'axios';
 import {
@@ -12,12 +12,19 @@ import {
 import PropTypes from 'prop-types';
 import ProductDescription from './ProductDescription.jsx';
 import StyleSelect from './StyleSelect.jsx';
-import { AppContext } from '#contexts';
-
-const ThemeContext = React.createContext('light');
+import { RelatedProductsContext, AppContext } from '../../contexts/Contexts.jsx';
 
 
 const Overview = (props) => {
+
+  const { idState } = useContext(AppContext);
+  console.log(idState, 'this is idState');
+  // console.log(idState, 'what is in idState');
+  // const [id, setIdState] = idState;
+
+
+  // console.log(id, 'idstate');
+
   const { productId } = props;
   const intProps = parseInt(productId);
   const [productInfo, setProductInfo] = useState({});
@@ -26,7 +33,7 @@ const Overview = (props) => {
     axios.get(`/api/products/${intProps}`, {
     })
       .then((response) => {
-        console.log(response.data, 'should be all id');
+        console.log(response, 'should be all overview info');
         setProductInfo(response.data.data);
       })
       .catch((error) => {
@@ -34,15 +41,11 @@ const Overview = (props) => {
       });
   }, []);
 
-  const currentURL = `http://localhost:5000/someslug/${intProps}`;
   return (
     <>
-    <ThemeContext.Provider value="dark">
-
       <div>
         share buttons
       </div>
-
       <div>
         <StyleSelect info={intProps} productInfo={productInfo} />
       </div>
@@ -52,10 +55,6 @@ const Overview = (props) => {
       <div>
         <ProductDescription info={productInfo} />
       </div>
-
-
-      </ThemeContext.Provider>
-
     </>
   );
 };

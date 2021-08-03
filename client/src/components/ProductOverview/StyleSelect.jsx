@@ -5,6 +5,22 @@ import Carousel from './Carousel.jsx';
 import BigPicture from './BigPicture.jsx';
 import RightMenu from './RightMenu.jsx';
 
+const OverallDiv = styled.div`
+`;
+
+const Dive = styled.div`
+right: 500px;
+position: absolute;
+border: 5px solid black;
+`;
+
+const StyleButton = styled.img`
+width: 75px;
+height: 75px;
+object-fit: cover;
+border: 5px solid black;
+border-radius:50%;
+`;
 
 const StyleSelect = (props) => {
   // should destructure the info from data
@@ -13,28 +29,10 @@ const StyleSelect = (props) => {
   const [currentZoom, setCurrentZoom] = useState(1);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const Dive = styled.div`
-  right: 500px;
-  position: absolute;
-  border: 5px solid black;
-
-
-`;
-
-  const OverallDiv = styled.div`
-
-`;
-
-  const StyleButton = styled.img`
-width: 75px;
-height: 75px;
-object-fit: cover;
-border: 5px solid black;
-border-radius:50%;
 
 
 
-`;
+
 
   useEffect(() => {
     axios.get(`/api/products/${props.info}/styles`, {
