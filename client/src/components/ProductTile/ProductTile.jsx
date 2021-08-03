@@ -2,7 +2,18 @@ import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { AppContext } from '#contexts';
+import Modal from '#components/Modal';
+import { AppContext, RelatedProductsContext } from '#contexts';
+
+/* Modal
+  style="
+      height: 100%;
+      width: 100%;
+      position: fixed;
+      background-color: #000000a8;
+      z-index: 1;
+  "
+*/
 
 const ControlDiv = styled.div`
   position: absolute;
@@ -65,11 +76,16 @@ const nameToSlug = (name) => (
 );
 
 const getImage = async (id) => {
+  const cachedStyle = localStorage.getItem(`style_${id}`);
+  if (cachedStyle) {
+    return [null, JSON.parse(cachedStyle)];
+  }
   try {
     const productStyles = await axios({
       url: `/api/products/${id}/styles`,
       method: 'GET',
     });
+    localStorage.setItem(`style_${id}`, JSON.stringify(productStyles.data.data));
     return [null, productStyles.data.data];
   } catch (e) {
     return [e];
@@ -78,6 +94,10 @@ const getImage = async (id) => {
 
 const getReviewsMeta = async (id) => {
   // localhost:5000/api/reviews/meta?product_id=25167
+  const cachedMeta = localStorage.getItem(`meta_${id}`);
+  if (cachedMeta) {
+    return [null, JSON.parse(cachedMeta)];
+  }
   try {
     const reviewsMeta = await axios({
       method: 'GET',
@@ -86,6 +106,7 @@ const getReviewsMeta = async (id) => {
         product_id: id,
       },
     });
+    localStorage.setItem(`meta_${id}`, JSON.stringify(reviewsMeta.data.data));
     return [null, reviewsMeta.data.data];
   } catch (e) {
     return [e];
@@ -112,12 +133,32 @@ const ProductTile = ({ data }) => {
   const { name, id, default_price: price, category } = data;
   const [imageUrl, setImageUrl] = useState(null);
   const { idState } = useContext(AppContext);
+  const { favoriteState } = useContext(RelatedProductsContext);
+  const [favorites, setFavorites] = favoriteState || [[], null];
   const [useIdState, setIdState] = idState;
   const [rating, setRating] = useState({
     avg: 0,
     count: 0,
   });
+  const [modalActive, setModalActive] = useState(false);
+  // const [favorites, setFavorites] = useState([]);
+  const toggleFavorite = () => {
+    // console.log('toggle!');
+    if (favorites.includes(id)) {
+      // is a favorite, toggle off
+      const filtered = favorites.filter((f) => f !== id);
+      // console.log(filtered);
+      setFavorites(filtered);
+      localStorage.setItem('favorites', JSON.stringify(filtered));
+    } else {
+      // console.log(favorites.concat([id]));
+      setFavorites(favorites.concat(id));
+      localStorage.setItem('favorites', JSON.stringify(favorites.concat(id)));
+      // not a favorite, toggle on
+    }
+  };
   useEffect(async () => {
+    // Stored as an array of ID's
     const [err, styleData] = await getImage(id);
     if (err || !styleData.results.length) return;
     const defaultItem = styleData.results.find((item) => (
@@ -146,14 +187,21 @@ const ProductTile = ({ data }) => {
   }, []);
   return (
     <OuterDiv>
-      <ControlDiv>
-        <div className="add-to-outfit">
-          <i className="far fa-star" />
-        </div>
-        <div className="compare">
-          <i className="fas fa-not-equal" />
-        </div>
-      </ControlDiv>
+      {favoriteState && (
+        <ControlDiv>
+          <div onClick={toggleFavorite} className="add-to-outfit">
+            <i className={`${favorites.includes(id) ? 'fas' : 'far'} fa-star`} />
+          </div>
+          <div onClick={() => {console.log('here'); setModalActive(true);}} className="compare">
+            <i className="fas fa-not-equal" />
+          </div>
+          {modalActive && (
+            <Modal>
+              <div>testttt</div>
+            </Modal>
+          )}
+        </ControlDiv>
+      )}
       <Link onClick={() => setIdState(id)} to={`/${nameToSlug(name)}/${id}`}>
         <ProductImageDiv>
           <ProductImg alt="Filler" height="300px" width="100%" src={imageUrl || '/images/default.png'} />
@@ -168,12 +216,7 @@ const ProductTile = ({ data }) => {
         <StarsDiv>
           {!rating.count
             ? 'No Reviews Yet'
-            : (
-              <>
-                <div>{ratingToStars(rating.avg)}</div>
-                {/* <div>{`(${rating.avg.toFixed(2)})`}</div> */}
-              </>
-            )}
+            : <div>{ratingToStars(rating.avg)}</div>}
         </StarsDiv>
       </ProductDetailsDiv>
     </OuterDiv>
