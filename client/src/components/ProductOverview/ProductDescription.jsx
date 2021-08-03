@@ -4,56 +4,62 @@ import styled, { css } from 'styled-components';
 
 const ProductDescription = (data) => {
   //should destructure the info from data
-  // const { info } = data;
+  const { info } = data;
   const FloatRight = styled.div`
   float: right;
-  padding-right: 200px;
+  padding-right: 250px;
+
+  `;
+
+  const ProductDescriptionDiv = styled.div`
+  position:relative;
 
   `;
 
 
-  var feats;
-  if (data.info.features) {
-    feats = data.info.features.map((oneFeat) => {
-      return (
-        <>
-          <li>{oneFeat.feature} : {oneFeat.value}</li>
-        </>
-      )
-    }
-    );
+  let feats;
+  if (info.features) {
+    feats = data.info.features.map((oneFeat) => (
+      <>
+        <li>
+          {oneFeat.feature}
+          :
+          {oneFeat.value}
+        </li>
+      </>
+    ));
   } else {
     feats = null;
   }
 
   return (
     <>
-    <FloatRight>
-      <div>
-        Slogan:
-        {data.info.slogan}
-      </div>
+      <ProductDescriptionDiv>
+        <FloatRight>
+          <div>
+            Slogan:
+            {info.slogan}
+          </div>
 
-      {feats}
+          {feats}
 
+        </FloatRight>
 
-    </FloatRight>
-
-
-    <div style={{"width":"50%", "border-right": "1px solid"}} className="products">
-      <div>Name: {data.info.name}</div>
-      <div>
-        Description:
-        {data.info.description}
-      </div>
-    </div>
+        <div style={{ width: '50%', borderRight: '1px solid' }} className="products">
+          <div>
+            Name:
+            {info.name}
+          </div>
+          <div>
+            Description:
+            {info.description}
+          </div>
+        </div>
+      </ProductDescriptionDiv>
 
 
     </>
-  )
-
-}
-
-
+  );
+};
 
 export default ProductDescription;

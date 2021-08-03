@@ -1,52 +1,38 @@
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-import React, { useState, useEffect } from 'react';
-import styled, { css } from 'styled-components';
-import PropTypes from 'prop-types';
+import React from 'react';
+const ZoomPlayground = (props) => (
+  <>
+    <div>Zoom Playground</div>
 
+    <TransformWrapper
+      initialScale={1}
+      initialPositionX={0}
+      initialPositionY={0}
+    >
+      {({
+        zoomIn, zoomOut, resetTransform, ...rest
+      }) => (
+        <>
+          <div className="tools">
+            <button onClick={() => zoomIn()}>Zoom In</button>
+            <button onClick={() => zoomOut()}>Zoom Out</button>
+            <button onClick={() => resetTransform()}>Original Size</button>
+            <button onClick={() => { props.zoomClick() }} >Go Back</button>
 
-const ZoomPlayground = (props) => {
-  console.log(props.imgURL, 'should be url')
+          </div>
+          <TransformComponent>
+            <img
+              src={props.imgURL}
+              style={{ width: "100%" }}
+              alt="zoomtest1"
+            />
+            <div>Zoom with buttons</div>
+          </TransformComponent>
+        </>
+      )}
+    </TransformWrapper>
 
-  return (
-    <>
-      <div>Zoom Playground</div>
-      <TransformWrapper defaultScale={1} defaultPositionX={100} defaultPositionY={200} >
-        <TransformComponent>
-          <img
-            src={props.imgURL}
-            style={{ width: "100%" }}
-            alt="zoomtest1"
-          />
-        </TransformComponent>
-      </TransformWrapper>
-
-
-
-      <TransformWrapper
-        initialScale={1}
-        initialPositionX={0}
-        initialPositionY={0}
-      >
-        {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
-          <React.Fragment>
-            <div className="tools">
-              <button onClick={() => zoomIn()}>+</button>
-              <button onClick={() => zoomOut()}>-</button>
-              <button onClick={() => resetTransform()}>x</button>
-            </div>
-            <TransformComponent>
-              <img src={props.imgURL} alt="test" />
-              <div>Zoom with buttons</div>
-            </TransformComponent>
-          </React.Fragment>
-        )}
-      </TransformWrapper>
-
-    </>
-  );
-};
-
+  </>
+);
 
 export default ZoomPlayground;
-
-//perhaps get a div element by id (or perhaps an empty img with a specific size) and then append the image file to it.
