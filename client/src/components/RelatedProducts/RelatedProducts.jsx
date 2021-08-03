@@ -63,7 +63,7 @@ const RelatedProducts = () => {
   return (
     <RelatedProductsContext.Provider value={{ favoriteState, useRelatedState }}>
       <PreviewList title="Related Products" list={useRelatedState} />
-      <PreviewList title="Your Outfit" list={useOutfitState} />
+      <PreviewList title="Your Outfit" list={useRelatedState.filter((item) => favorites.includes(item.id))} />
     </RelatedProductsContext.Provider>
   );
 };
