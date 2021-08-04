@@ -18,10 +18,9 @@ jest.mock('axios');
 describe('Overview', () => {
   test('renders App component', async () => {
 
-    // const idState1 = useState(15111);
+  // const idState1 = useState(15111);
 
     act(() => {
-
       axios.get.mockResolvedValue({
         "data": {
           "statusCode": 200,
@@ -103,7 +102,7 @@ describe('Overview', () => {
       }, 4500);
     });
 
-    jest.resetAllMocks()
+    jest.resetAllMocks();
   });
 });
 

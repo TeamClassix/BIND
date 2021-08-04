@@ -3,18 +3,18 @@ import axios from 'axios';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 const RightMenu = (props) => {
-  console.log(props, 'these are the props to pass in rightmenu')
   const [cats, setCats] = useState("Select");
   const [quantity, setQuantity] = useState("Select");
   const [reviewAvg, setReviewAvg] = useState(0);
   const [cart, setCart] = useState([{ sku_id: 828826, count: "62" }]);
 
   const { currentZoom, info, upper, currentStyle } = props;
-  console.log(currentStyle.skus, 'the skus');
+  // console.log(currentStyle.skus, 'the skus');
   useEffect(() => {
     axios.get(`/api/reviews/meta?product_id=${info}`, {
     })
       .then((response) => {
+        // console.log(response, 'this needs to be inserted into it');
         let totalVal = 0;
         let totalRev = 0;
         for (const j in response.data.data.ratings) {
@@ -33,7 +33,7 @@ const RightMenu = (props) => {
     axios.get(`/api/cart`, {
     })
       .then((response) => {
-        console.log(response.data.data, 'this is the cart');
+        // console.log(response.data.data, 'this is the cart');
         setCart(response.data.data);
       })
       .catch((error) => {
@@ -85,7 +85,7 @@ const RightMenu = (props) => {
   }
 
   const optsize = skuser.map((siz) => {
-    console.log(siz, 'siz and sizes');
+    // console.log(siz, 'siz and sizes');
     if (currentStyle.skus[siz].quantity === 0) {
       return null;
     }
@@ -123,7 +123,7 @@ const RightMenu = (props) => {
     return null;
   }
 
-  console.log(cart, 'should be the cart');
+  // console.log(cart, 'should be the cart');
   return (
     <>
       <span style={{ color: 'Dodgerblue' }}>
