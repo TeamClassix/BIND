@@ -43,7 +43,7 @@ const PreviewList = ({ title, list }) => {
   // /products/:product_id/related
   return (
     <div>
-      <h1>{title}</h1>
+      <h1>{title} ({list.length})</h1>
       {list.length
         ? (
           <RowDiv>
