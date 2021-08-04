@@ -2,19 +2,17 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const QuestionModal = ({ show, onClose, productName, productIdNumber }) => {
+const QuestionModal = ({ show, onClose, productName, productId }) => {
   const [answerBody, setAnswerBody] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
   const submitQuestion = () => (
     axios.post('/api/qa/questions', {
-      params: {
-        body: answerBody,
-        name: name,
-        email: email,
-        product_id: productIdNumber,
-      },
+      body: answerBody,
+      name: name,
+      email: email,
+      product_id: productId,
     })
   );
 

@@ -6,12 +6,12 @@ import React from 'react';
 //   color: red
 // `;
 
-const SearchBar = ({ searchTerm }) => (
+const SearchBar = ({ searchTerm, searchQuestions }) => (
   <div>
-        <form>
-          <input placeholder="Have a question? Search for answers…" onChange={searchTerm} />
-          <button type="submit">Search</button>
-        </form>
+    <form>
+      <input placeholder="Have a question? Search for answers…" onChange={searchTerm} />
+      <button type="submit">Search</button>
+    </form>
   </div>
 );
 
