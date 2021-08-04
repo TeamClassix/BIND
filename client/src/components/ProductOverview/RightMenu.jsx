@@ -1,30 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled, { css } from 'styled-components';
-
+import PropTypes from 'prop-types';
 const RightMenu = (props) => {
   const [cats, setCats] = useState("Select");
   const [quantity, setQuantity] = useState("Select");
   const [reviewAvg, setReviewAvg] = useState(0);
+  const [cart, setCart] = useState([{ sku_id: 828826, count: "62" }]);
 
-
-  const iconStyle = styled.i`
-  background-color: tomato;
-  border: double;
-
-`;
-
-
+  const { currentZoom, info, upper, currentStyle } = props;
+  // console.log(currentStyle.skus, 'the skus');
   useEffect(() => {
-    axios.get(`/api/reviews/meta?product_id=${props.info}`, {
+    axios.get(`/api/reviews/meta?product_id=${info}`, {
     })
       .then((response) => {
-        console.log(response.data.data.ratings, 'should be all reviews');
-        //get total value
-        //get number of reviews
+        // console.log(response, 'this needs to be inserted into it');
         let totalVal = 0;
         let totalRev = 0;
-        for (var j in response.data.data.ratings) {
+        for (const j in response.data.data.ratings) {
           let reviewNum = parseInt(response.data.data.ratings[j]);
           totalRev += reviewNum;
           totalVal += (reviewNum * parseInt(j));
@@ -37,69 +30,122 @@ const RightMenu = (props) => {
   }, []);
 
   useEffect(() => {
-    setCats("Select");
-    setQuantity("Select");
-  }, [props.currentStyle]);
+    axios.get(`/api/cart`, {
+    })
+      .then((response) => {
+        // console.log(response.data.data, 'this is the cart');
+        setCart(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-  let sizes = [];
-  for (let sku in props.currentStyle.skus) {
-    // console.log(props.currentStyle.skus[sku], 'skus');
-    sizes.push(props.currentStyle.skus[sku]);
+
+  const deleteCart = () => {
+    axios.delete(`/api/cart`, {
+    })
+      .then((response) => {
+        console.log('does this delete');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
-  // these are where sizes are listed
-  let optsize = sizes.map((siz) => {
-    if (siz.quantity === 0) {
+
+  useEffect(() => {
+    setCats('Select');
+    setQuantity('Select');
+  }, [currentStyle]);
+
+  const submitCart = (event) => {
+    event.preventDefault();
+    const skuInt = parseInt(event.target[0].value);
+    const quantityInt = parseInt(event.target[1].value);
+    for (let i = 0; i < quantityInt; i++) {
+      axios.post(`/api/cart`, {
+        sku_id: skuInt,
+        count: quantityInt,
+      })
+        .then((response) => {
+          console.log(response.data.data, 'this is the cart');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
+  let sizes = [];
+  const skuser = [];
+  for (let sku in currentStyle.skus) {
+    skuser.push([sku]);
+    sizes.push(currentStyle.skus[sku]);
+  }
+
+  const optsize = skuser.map((siz) => {
+    // console.log(siz, 'siz and sizes');
+    if (currentStyle.skus[siz].quantity === 0) {
       return null;
     }
-    return (<option value={JSON.stringify(siz)}>{siz.size}</option>);
+    return (<option value={siz}>{currentStyle.skus[siz].size}</option>);
   });
 
-  console.log(optsize, 'opt');
-
   //builds the options value for the inventory number
-  let quant = [];
+  const quant = [];
   if (cats !== "Select") {
-    let par = JSON.parse(cats);
-    console.log(par, 'par');
+    const par = currentStyle.skus[cats].quantity;
     for (let i = 0; i < 16; i += 1) {
-      if (cats.quantity !== 'Select' && i < (par.quantity + 1)) {
+      if (cats.quantity !== 'Select' && i < (par + 1)) {
         quant.push(<option value={i}>{i}</option>);
       }
     }
   }
 
-  let stars = [];
+  const stars = [];
   for (let star = 0.5; star < 5.5; star += 1) {
     if (star < reviewAvg && star < Math.floor(reviewAvg)) {
-      stars.push(<i className="fas fa-star"></i>);
+      stars.push(<i className="fas fa-star" />);
     } else if (star < reviewAvg && star > Math.floor(reviewAvg)) {
-      stars.push(<i className="fas fa-star-half"></i>);
+      stars.push(<i className="fas fa-star-half" />);
     } else {
-      stars.push(<i className="far fa-star"></i>);
+      stars.push(<i className="far fa-star" />);
     }
   }
 
-  if (props.currentZoom === 2 || props.currentZoom === 3) {
-    return null
+  // const cartStuff = [];
+  // for (let cartIndex=0; cartIndex<cart.length; cartIndex++) {
+  //   cart[cartIndex]
+  // }
+
+  if (currentZoom === 2 || currentZoom === 3) {
+    return null;
   }
 
+  // console.log(cart, 'should be the cart');
   return (
     <>
-      <span style={{"color": "Dodgerblue"}}>
-      {stars}
+      <span style={{ color: 'Dodgerblue' }}>
+        {stars}
       </span>
 
-      <h1>Name: {props.upper.name}</h1>
+      <h1>
+        Name:
+        {upper.name}
+      </h1>
 
-      <div>Category: {props.upper.category} </div>
+      <div>Category: {upper.category} </div>
 
 
-      <div>current style: {props.currentStyle.name}</div>
-      <div>Price: {props.upper.default_price}</div>
-      <form onSubmit={() => { console.log('submitted') }}>
+      <div>
+        current style:
+        {currentStyle.name}
+      </div>
+      <div>Price: {upper.default_price}</div>
+      <form onSubmit={(event) => { submitCart(event) }}>
         <label>
-          Pick your favorite flavor:
+          Pick your favorite size:
           <select value={cats} onChange={(event) => { setCats((event.target.value)) }}>
             <option value="Select">Select One</option>
             {optsize}
@@ -107,7 +153,7 @@ const RightMenu = (props) => {
         </label>
         <br></br>
         <label>
-          Pick your favorite flavor:
+          Quantity:
           <select value={quantity} onChange={(event) => { setQuantity((event.target.value)) }}>
             <option value="Select">Select One</option>
             {quant}
@@ -117,23 +163,29 @@ const RightMenu = (props) => {
         <input type="submit" value="Add to Cart" />
       </form>
 
+      {/* <form onSubmit={(event) => { console.log('submit') }}>
+        <label>
+          What is in your cart:
+          <select value="Select" onChange={(event) => { console.log('not necessary') }}>
+            <option value="Select">Select One</option>
+          </select>
+        </label>
+        <input type="submit" value="Add to Cart" />
+      </form> */}
 
-      <span style={{"color": "Dodgerblue"}}>
-        <i onClick={()=>console.log('this should change favorites')}class="fas fa-star"></i>
+      <button onClick={() => { deleteCart() }}>Clear Cart</button>
+      <span style={{ "color": "Dodgerblue" }}>
+        <i onClick={() => console.log('this should change favorites')} className="fas fa-star"></i>
       </span>
-      <br></br>
+      <br />
 
     </>
   );
 };
+
+RightMenu.propTypes = {
+  currentZoom: PropTypes.number.isRequired
+};
+
 export default RightMenu;
 
-
-//category
-//name
-//price
-//style buttons
-//size
-//quantity to purchase
-//add to bag
-//favorites

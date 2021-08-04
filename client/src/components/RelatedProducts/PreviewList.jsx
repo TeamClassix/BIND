@@ -43,7 +43,7 @@ const PreviewList = ({ title, list }) => {
   // /products/:product_id/related
   return (
     <div>
-      <h1>{title}</h1>
+      <h1>{title} ({list.length})</h1>
       {list.length
         ? (
           <RowDiv>
@@ -51,8 +51,8 @@ const PreviewList = ({ title, list }) => {
               <LeftControlDiv onClick={() => rpStart > 0 && handleClick(-1)}>
                 {rpStart > 0 && <i className="fas fa-chevron-left" />}
               </LeftControlDiv>
-              <LeftControlDiv onClick={() => rpStart + 4 < list.length - 1 && handleClick(1)}>
-                {rpStart + 4 < list.length - 1 && <i className="fas fa-chevron-right" />}
+              <LeftControlDiv onClick={() => rpStart + 4 < list.length && handleClick(1)}>
+                {rpStart + 4 < list.length && <i className="fas fa-chevron-right" />}
               </LeftControlDiv>
             </ControlDiv>
             <ContainerDiv>
