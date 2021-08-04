@@ -5,16 +5,6 @@ import axios from 'axios';
 import Modal from '#components/Modal';
 import { AppContext, RelatedProductsContext } from '#contexts';
 
-/* Modal
-  style="
-      height: 100%;
-      width: 100%;
-      position: fixed;
-      background-color: #000000a8;
-      z-index: 1;
-  "
-*/
-
 const ControlDiv = styled.div`
   position: absolute;
   display: flex;
@@ -129,6 +119,102 @@ const ratingToStars = (avg) => {
   return starSet;
 };
 
+const getProductInfo = async (id) => {
+  const cached = localStorage.getItem(`product_${id}`);
+  if (cached) {
+    return [null, JSON.parse(cached)];
+  }
+  try {
+    const result = await axios({
+      method: 'GET',
+      url: `/api/products/${id}`,
+    });
+    localStorage.setItem(`product_${id}`, JSON.stringify(result.data.data));
+    return [null, result.data.data];
+  } catch (e) {
+    return [e];
+  }
+};
+
+const C = styled.div`
+  text-transform: uppercase;
+  font-size: 0.825em;
+  margin-bottom: 10px;
+`;
+const Left = styled.td`
+  text-align: left;
+  width: 33%;
+  border-bottom: 1px dashed #8787874d;
+  font-size: 0.8em;
+`;
+const Center = styled.td`
+  text-align: center;
+  width: 33%;
+  font-weight: bold;
+  font-size: 0.85em;
+  text-transform: uppercase;
+  border-bottom: 1px dashed #8787874d;
+`;
+const Right = styled.td`
+  text-align: right;
+  width: 33%;
+  border-bottom: 1px dashed #8787874d;
+  font-size: 0.8em;
+`;
+
+const ComparisonModal = ({ id, cId }) => {
+  const [title, setTitle] = useState(null);
+  const [table, setTable] = useState([]);
+  useEffect(async () => {
+    console.log(id, cId);
+    const both = [getProductInfo(id), getProductInfo(cId)];
+    const [res1, res2] = await Promise.all(both);
+    const combined = {};
+    if (!res1[0] && !res2[0]) {
+      setTitle([res1[1].name, res2[1].name]);
+      res1[1].features.forEach(({ feature, value }) => {
+        console.log('1', feature);
+        combined[feature] = [value, null];
+      });
+      res2[1].features.forEach(({ feature, value }) => {
+        console.log('2', feature);
+        if (combined[feature]) {
+          combined[feature][1] = value;
+        } else {
+          combined[feature] = [null, value];
+        }
+      });
+      setTable(Object.entries(combined));
+    }
+  }, []);
+  return (
+    <>
+      <C>Comparing</C>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        fontWeight: 'bold',
+        marginBottom: 8,
+      }}>
+        <div>{title ? title[0] : '-'}</div>
+        <div>{title ? title[1] : '-'}</div>
+      </div>
+      <table>
+        {table.map((item) => {
+          console.log(item);
+          return (
+            <tr>
+              <Left>{item[1][0]}</Left>
+              <Center>{item[0]}</Center>
+              <Right>{item[1][1]}</Right>
+            </tr>
+          );
+        })}
+      </table>
+    </>
+  );
+};
+
 const ProductTile = ({ data }) => {
   const { name, id, default_price: price, category } = data;
   const [imageUrl, setImageUrl] = useState(null);
@@ -196,8 +282,8 @@ const ProductTile = ({ data }) => {
             <i className="fas fa-not-equal" />
           </div>
           {modalActive && (
-            <Modal>
-              <div>testttt</div>
+            <Modal toggle={setModalActive}>
+              <ComparisonModal id={id} cId={useIdState} />
             </Modal>
           )}
         </ControlDiv>
