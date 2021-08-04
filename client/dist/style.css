@@ -5,6 +5,10 @@ body {
   display: flex;
   margin: 0;
 }
+#modal {
+  font-family: 'Roboto', 'sans-serif';
+  color: #525252;
+}
 
 #app {
   display: flex;
