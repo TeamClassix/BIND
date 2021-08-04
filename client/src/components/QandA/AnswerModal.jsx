@@ -1,41 +1,45 @@
+/* eslint-disable no-alert */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable object-shorthand */
 import React, { useState } from 'react';
 import axios from 'axios';
-// import styled from 'styled-components';
-
-// const aModal = styled.div`
-//   position: absolute;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   margin: 40px auto;
-//   background: black;
-// `;
 
 const AnswerModal = ({ show, onClose, questionId, question, productName }) => {
   const [answerBody, setAnswerBody] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [invalidEmail, setInvalidEmail] = useState(false);
   // const [photos, setPhotos] = useState([]);
 
-  // how to do axios post request with both query and body params
-  // check email format
-  const submitAnswer = () => (
-    // if (answerBody === '' || name === '' || email === '') {
-    //   window.alert('uh oh')
+  const checkEmail = () => {
+    // const regex = new Regex([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$);
+    // const test = regex.test(email);
+    // if (!test) {
+    //   setInvalidEmail(true);
     // }
+    // console.log('checkEmail', test);
+  };
+
+  const submitAnswer = () => (
     axios.post(`/api/qa/questions/${questionId}/answers`, {
-      data: {
-        body: answerBody,
-        name: name,
-        email: email,
-      },
-      query: {
+      body: answerBody,
+      name: name,
+      email: email,
+    }, {
+      params: {
         question_id: questionId,
       },
     })
   );
+
+  const checkForm = () => {
+    checkEmail();
+    if (answerBody === '' || name === '' || email === '' || invalidEmail) {
+      window.alert('ruh roh');
+    } else {
+      submitAnswer();
+    }
+  };
 
   const handleAnswerBody = (event) => {
     setAnswerBody(event.target.value);
@@ -48,10 +52,6 @@ const AnswerModal = ({ show, onClose, questionId, question, productName }) => {
   const handleEmail = (event) => {
     setEmail(event.target.value);
   };
-
-  // const handlePhotos = (event) => {
-  //   setPhotos(event.target.value);
-  // };
 
   if (!show) {
     return null;
@@ -90,9 +90,9 @@ const AnswerModal = ({ show, onClose, questionId, question, productName }) => {
           For authentication reasons, you will not be emailed.
         </form>
       </div>
-      <button type="submit">Upload Your Photos</button>
+      {/* <button type="submit">Upload Your Photos</button> */}
       <br />
-      <button type="submit" onClick={submitAnswer}>Submit Answer</button>
+      <button type="submit" onClick={checkForm}>Submit Answer</button>
       <button type="submit" onClick={onClose}>Close</button>
     </div>
   );

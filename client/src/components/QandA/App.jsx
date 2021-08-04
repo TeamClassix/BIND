@@ -10,16 +10,8 @@ const App = ({ productId }) => {
   const [questions, setQuestions] = useState([]);
   const [questionShow, setQuestionShow] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [searching, setSearching] = useState(false);
-  const [noQuestions, setNoQuestions] = useState(false);
   const [productName, setProductName] = useState('');
-  const [productIdNumber, setProductIdNumber] = useState('');
-
-  const handleNoQuestions = () => {
-    if (questions.length === 0) {
-      setNoQuestions(true);
-    }
-  };
+  const [searchResults, setSearchResults] = useState([]);
 
   const getQuestions = () => (
     axios.get('/api/qa/questions', {
@@ -30,10 +22,9 @@ const App = ({ productId }) => {
       .then((response) => {
         setQuestions(response.data.data.results);
       })
-      .then(handleNoQuestions)
-      .catch((error) => {
-        console.log(error);
-      })
+      .catch((error) => (
+        error
+      ))
   );
 
   const getProductInfo = () => {
@@ -44,35 +35,40 @@ const App = ({ productId }) => {
     })
       .then((response) => {
         setProductName(response.data.data.name);
-        setProductIdNumber(response.data.data.id);
       });
   };
 
   useEffect(getQuestions, []);
   useEffect(getProductInfo, []);
 
+  const searchQuestions = () => {
+    setSearchResults([]);
+    const results = new Set();
+    questions.forEach((question) => {
+      if (question.question_body.toLowerCase().includes(searchTerm.toLowerCase())) {
+        results.add(question);
+      }
+    });
+    setSearchResults(Array.from(results));
+  };
+
   const handleSearchTerm = (event) => {
     setSearchTerm(event.target.value);
     if (event.target.value.length >= 3) {
-      setSearching(true);
+      searchQuestions();
+    } else if (event.target.value.length < 3) {
+      setSearchResults([]);
     }
-  };
-
-  const searchQuestions = () => {
-    //if searching is true
-    //map over array of questions
-    //check if question includes search term,
-    //if yes, push to new array and pass down to render
   };
 
   return (
     <div>
       <h1>Questions and Answers</h1>
-      <SearchBar searchTerm={handleSearchTerm} />
-      <QandAContainer questions={questions} productName={productName}/>
-      <MoreQuestions noQuestions={noQuestions} />
+      <SearchBar searchTerm={handleSearchTerm} searchQuestions={searchQuestions} />
+      <QandAContainer questions={searchResults.length ? searchResults : questions} productName={productName} />
+      <MoreQuestions />
       <button type="submit" onClick={() => setQuestionShow(true)}>Add A Question</button>
-      <QuestionModal onClose={() => setQuestionShow(false)} show={questionShow} productName={productName} productIdNumber={productIdNumber} />
+      <QuestionModal onClose={() => setQuestionShow(false)} show={questionShow} productName={productName} productId={productId} />
     </div>
   );
 };

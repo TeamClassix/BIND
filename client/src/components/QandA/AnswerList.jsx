@@ -14,18 +14,21 @@ const AnswerList = ( {questionId} ) => {
       .then((response) => {
         setAnswers(response.data.data.results);
       })
-      .catch((error) => {
-        console.log(error);
-      })
+      .catch((error) => (
+        error
+      ))
   );
 
   useEffect(getAnswers, []);
 
+  const sortedAnswers = answers;
+  sortedAnswers.sort((a, b) => (a.helpfulness > b.helpfulness));
+
   return (
     <div>
-      {answers.map((answer) => (
+      {sortedAnswers.map((answer) => (
         // eslint-disable-next-line max-len
-        <AnswerItem id={answer.answer_id} name={answer.answerer_name} body={answer.body} date={answer.date} helpful={answer.helpfulness} />
+        <AnswerItem id={answer.answer_id} name={answer.answerer_name} body={answer.body} date={answer.date} helpful={answer.helpfulness} photos={answer.photos} />
       ))}
     </div>
   );
