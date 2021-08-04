@@ -9,8 +9,8 @@ const OverallDiv = styled.div`
 `;
 
 const Dive = styled.div`
-right: 500px;
-position: absolute;
+float:right;
+position: relative;
 border: 5px solid black;
 `;
 
@@ -29,11 +29,6 @@ const StyleSelect = (props) => {
   const [currentZoom, setCurrentZoom] = useState(1);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-
-
-
-
-
   useEffect(() => {
     axios.get(`/api/products/${props.info}/styles`, {
       params: {},
@@ -49,7 +44,7 @@ const StyleSelect = (props) => {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, [props.info]);
 
   // event handler for clicking to change the current style
   const currentStyleChangeButton = (event) => {
@@ -77,8 +72,6 @@ const StyleSelect = (props) => {
     setCurrentIndex(newIndex);
   };
 
-
-
   if (allStyle === null) {
     //timelogs can be helpful
     // console.timeLog('null allstyle');
@@ -98,16 +91,15 @@ const StyleSelect = (props) => {
             <br />
 
           </>
-        )
+        );
       }
       return (
         <>
           <StyleButton value={JSON.stringify(eachStyle)} onClick={(event) => { currentStyleChangeButton(event) }} className="styleButton" src={eachStyle.photos[0].thumbnail_url} alt="Large" />
         </>
-      )
+      );
     });
   }
-
 
   //needs to not render the rightmenu
   return (
