@@ -51,6 +51,7 @@ const StyledLink = styled(Link)`
   &:visited {
     color: #fff;
   }
+  color: #fff;
   text-decoration: none;
 `;
 
