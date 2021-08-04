@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
+import {
+  FacebookShareButton,
+  PinterestShareButton,
+  TwitterShareButton,
+  FacebookIcon,
+  PinterestIcon,
+  TwitterIcon,
+} from "react-share";
 import ZoomPlayground from './ZoomPlayground.jsx';
 
 
@@ -14,8 +22,8 @@ const BigPicture = (props) => {
     tinyImageWidth: 1,
   });
 
-  let xZoom = ((100 * ratio.x / ratio.tinyImageWidth)) + '';
-  let yZoom = ((100 * ratio.y / ratio.tinyImageHeight)) + '';
+  const xZoom = ((100 * ratio.x / ratio.tinyImageWidth)) + '';
+  const yZoom = ((100 * ratio.y / ratio.tinyImageHeight)) + '';
 
   const ZoomImage = styled.img`
   object-position: ${xZoom}% ${yZoom}%;
@@ -31,7 +39,7 @@ const BigPicture = (props) => {
   width:100%;
   `
     }
-${something => props.currentZoom === 2 && css`
+  ${something => props.currentZoom === 2 && css`
   cursor: zoom-in;
   width:100%;
   display: block;
@@ -61,9 +69,6 @@ ${something => props.currentZoom === 2 && css`
     }
 `;
 
-
-
-  //possible exploration of a way to append something to a div but was not sure if this was a working solution
   const fiddle = new Image();
   // fiddle.onload = function() {
   //   alert(this.width + 'x' + this.height);
@@ -71,30 +76,46 @@ ${something => props.currentZoom === 2 && css`
   fiddle.src = props.imgURL;
   // document.body.appendChild(fiddle);
 
-  if (props.currentZoom===3) {
+  if (props.currentZoom === 3) {
     return (
       <>
-      <img id="myimage" src={props.imgURL} width="50%" onClick={(event) => {
-        setRatio({
-          x: (event.pageX - event.target.offsetLeft),
-          y: (event.pageY - event.target.offsetTop),
-          actHeight: (event.target.attributes[1].ownerElement.naturalHeight),
-          actWidth: (event.target.attributes[1].ownerElement.naturalWidth),
-          tinyImageHeight: event.target.clientHeight,
-          tinyImageWidth: event.target.clientWidth
-        })
-      }} />
+        {/* <img id="myimage"
+          alt="zoomable"
+          src={props.imgURL} width="50%"
+          onClick={(event) => {
+            setRatio({
+              x: (event.pageX - event.target.offsetLeft),
+              y: (event.pageY - event.target.offsetTop),
+              actHeight: (event.target.attributes[1].ownerElement.naturalHeight),
+              actWidth: (event.target.attributes[1].ownerElement.naturalWidth),
+              tinyImageHeight: event.target.clientHeight,
+              tinyImageWidth: event.target.clientWidth
+            })
+          }} />
 
-    <ZoomImage src={props.imgURL} onClick={() => { props.zoomClick() }}/>
-    <ZoomPlayground imgURL={props.imgURL}/>
+        <ZoomImage src={props.imgURL} onClick={() => { props.zoomClick() }} /> */}
+        <ZoomPlayground imgURL={props.imgURL} zoomClick={props.zoomClick} />
       </>
-
-
-    )
-
+    );
   }
   return (
     <>
+      <FacebookShareButton
+        url="http://localhost:5000/someslug/"
+        quote="Hello"
+        className="share-button"
+      >
+        <FacebookIcon size={32} round />
+      </FacebookShareButton>
+
+      <TwitterShareButton
+        url="http://localhost:5000/someslug/"
+        title="Twitter"
+        className="share-button"
+      >
+        <TwitterIcon size={32} round />
+      </TwitterShareButton>
+
       <Container>
 
         <Sty onClick={() => { props.zoomClick() }} id="BigPicture" src={props.imgURL} alt="Large" />
