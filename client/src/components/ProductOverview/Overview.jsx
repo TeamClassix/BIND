@@ -1,14 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled, { css } from 'styled-components';
 import axios from 'axios';
-import {
-  FacebookShareButton,
-  PinterestShareButton,
-  TwitterShareButton,
-  FacebookIcon,
-  PinterestIcon,
-  TwitterIcon,
-} from "react-share";
 import PropTypes from 'prop-types';
 import ProductDescription from './ProductDescription.jsx';
 import StyleSelect from './StyleSelect.jsx';
