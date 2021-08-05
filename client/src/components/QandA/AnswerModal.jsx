@@ -8,17 +8,14 @@ const AnswerModal = ({ show, onClose, questionId, question, productName }) => {
   const [answerBody, setAnswerBody] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [invalidEmail, setInvalidEmail] = useState(false);
+  // const [invalidEmail, setInvalidEmail] = useState(false);
   // const [photos, setPhotos] = useState([]);
 
-  const checkEmail = () => {
-    // const regex = new Regex([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$);
-    // const test = regex.test(email);
-    // if (!test) {
-    //   setInvalidEmail(true);
-    // }
-    // console.log('checkEmail', test);
-  };
+  // const checkEmail = () => {
+  //   if (email.indexOf('@') > email.indexOf('.')) {
+  //     setInvalidEmail(true);
+  //   }
+  // };
 
   const submitAnswer = () => (
     axios.post(`/api/qa/questions/${questionId}/answers`, {
@@ -30,12 +27,13 @@ const AnswerModal = ({ show, onClose, questionId, question, productName }) => {
         question_id: questionId,
       },
     })
+      .then(onClose)
   );
 
   const checkForm = () => {
-    checkEmail();
-    if (answerBody === '' || name === '' || email === '' || invalidEmail) {
-      window.alert('ruh roh');
+    // checkEmail();
+    if (answerBody === '' || name === '' || email === '') {
+      window.alert('Missing mandatory field. Please make sure all fields are filled.');
     } else {
       submitAnswer();
     }

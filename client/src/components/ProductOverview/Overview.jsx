@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled, { css } from 'styled-components';
 import axios from 'axios';
-
 import PropTypes from 'prop-types';
 import ProductDescription from './ProductDescription.jsx';
 import StyleSelect from './StyleSelect.jsx';
@@ -11,13 +10,7 @@ import { RelatedProductsContext, AppContext } from '../../contexts/Contexts.jsx'
 const Overview = (props) => {
 
   const { idState } = useContext(AppContext);
-  // console.log(idState, 'this is idState');
-  // console.log(idState, 'what is in idState');
   const [id, setIdState] = idState;
-
-
-  // console.log(id, 'idstate');
-
   const { productId } = props;
   const intProps = parseInt(id);
   console.log(intProps, 'intprops');

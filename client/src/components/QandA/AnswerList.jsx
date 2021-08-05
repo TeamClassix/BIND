@@ -4,6 +4,7 @@ import AnswerItem from './AnswerItem';
 
 const AnswerList = ( {questionId} ) => {
   const [answers, setAnswers] = useState([]);
+  // const [moreAnswers, setMoreAnswers] = useState(null);
 
   const getAnswers = () => (
     axios.get(`/api/qa/questions/${questionId}/answers`, {
@@ -23,6 +24,17 @@ const AnswerList = ( {questionId} ) => {
 
   const sortedAnswers = answers;
   sortedAnswers.sort((a, b) => (a.helpfulness > b.helpfulness));
+
+  // if (sortedAnswers.length > 2) {
+  //   setMoreAnswers(true);
+  // }
+
+  // let limitAnswers = [];
+  // if (moreAnswers) {
+  //   limitAnswers = sortedAnswers.slice(0, 2);
+  // } else {
+  //   limitAnswers = sortedAnswers;
+  // }
 
   return (
     <div>

@@ -1,6 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import styled from 'styled-components';
+
+const Author = styled.div`
+  display: flex;
+  flex-direction: row;
+  font-size: x-small;
+  margin-top: 2px;
+`;
+
+const Image = styled.img`
+  border: 1px solid #525252;
+  margin: 5px;
+  width: auto;
+  height: 150px;
+`;
+
+const Answer = styled.div`
+  position: relative;
+  left: 21px;
+  top: -19px;
+  height: auto;
+  font-size: 15px;
+`;
+
+const Click = styled.div`
+  cursor: pointer;
+  &:hover{
+    text-decoration: underline
+  }
+`;
 
 const AnswerItem = ({ id, name, body, date, helpful, photos }) => {
   const [helpfulness, setHelpfulness] = useState(helpful);
@@ -32,31 +62,35 @@ const AnswerItem = ({ id, name, body, date, helpful, photos }) => {
   };
 
   return (
-    <div>
+    <Answer>
       <div className="body">
         {body}
       </div>
       <div className="photos">
         {photos ? photos.map((photo) => (
-          <img src={photo.url} alt="" width="auto" height="150" />
+          <Image src={photo.url} alt="" />
         )) : null}
       </div>
-      <div className="name">
-        {name.toLowerCase() === 'seller' ? <b>{name}</b> : name}
-      </div>
-      <div className="date">
-        {`, ${formattedDate} |`}
-      </div>
-      <div className="helpful">
-        Helpful?
-      </div>
-      <div className="Yes" onClick={incrementHelpfulness}>
-        {`Yes (${count})`}
-      </div>
-      <div className="Report" onClick={handleReport}>
-        {report ? 'Reported' : 'Report'}
-      </div>
-    </div>
+      <Author>
+        <div className="name">
+          by: {name.toLowerCase() === 'seller' ? <b>{name}</b> : name}
+        </div>
+        <div className="date">
+          {`, ${formattedDate} |`}
+        </div>
+        <div className="helpful">
+          &nbsp;Helpful?&nbsp;
+        </div>
+        <Click className="Yes" onClick={incrementHelpfulness}>
+          {`Yes (${count}) |`}
+          &nbsp;
+        </Click>
+        <Click className="Report" onClick={handleReport}>
+          {report ? 'Reported' : 'Report'}
+        </Click>
+      </Author>
+      <br />
+    </Answer>
   );
 };
 
