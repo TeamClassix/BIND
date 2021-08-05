@@ -6,9 +6,12 @@ const RightMenu = (props) => {
   const [cats, setCats] = useState("Select");
   const [quantity, setQuantity] = useState("Select");
   const [reviewAvg, setReviewAvg] = useState(0);
+  const [reviewLength, setReviewLength] = useState(0);
   const [cart, setCart] = useState([{ sku_id: 828826, count: "62" }]);
 
   const { currentZoom, info, upper, currentStyle } = props;
+
+  console.log(upper, 'this needs more than one price');
   // console.log(currentStyle.skus, 'the skus');
   useEffect(() => {
     axios.get(`/api/reviews/meta?product_id=${info}`, {
@@ -21,13 +24,14 @@ const RightMenu = (props) => {
           let reviewNum = parseInt(response.data.data.ratings[j]);
           totalRev += reviewNum;
           totalVal += (reviewNum * parseInt(j));
-          setReviewAvg((totalVal / totalRev));
         }
+        setReviewLength(totalRev);
+        setReviewAvg((totalVal / totalRev));
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [info]);
 
   useEffect(() => {
     axios.get(`/api/cart`, {
@@ -84,13 +88,20 @@ const RightMenu = (props) => {
     sizes.push(currentStyle.skus[sku]);
   }
 
+  let countNoInventory = 0;
   const optsize = skuser.map((siz) => {
     // console.log(siz, 'siz and sizes');
     if (currentStyle.skus[siz].quantity === 0) {
+      countNoInventory+=1;
       return null;
     }
     return (<option value={siz}>{currentStyle.skus[siz].size}</option>);
   });
+
+  let noInventoryCheck = [];
+  if (countNoInventory === skuser.length) {
+    noInventoryCheck = [(<option value="nothing left">Nothing Left</option>)]
+  }
 
   //builds the options value for the inventory number
   const quant = [];
@@ -103,6 +114,8 @@ const RightMenu = (props) => {
     }
   }
 
+
+  //.25-.75 is half a star .75 or greater round up
   const stars = [];
   for (let star = 0.5; star < 5.5; star += 1) {
     if (star < reviewAvg && star < Math.floor(reviewAvg)) {
@@ -130,6 +143,9 @@ const RightMenu = (props) => {
         {stars}
       </span>
 
+      <span>
+        {reviewLength}
+      </span>
       <h1>
         Name:
         {upper.name}
@@ -149,9 +165,10 @@ const RightMenu = (props) => {
           <select value={cats} onChange={(event) => { setCats((event.target.value)) }}>
             <option value="Select">Select One</option>
             {optsize}
+            {noInventoryCheck}
           </select>
         </label>
-        <br></br>
+        <br />
         <label>
           Quantity:
           <select value={quantity} onChange={(event) => { setQuantity((event.target.value)) }}>

@@ -10,15 +10,10 @@ import { RelatedProductsContext, AppContext } from '../../contexts/Contexts.jsx'
 const Overview = (props) => {
 
   const { idState } = useContext(AppContext);
-  console.log(idState, 'this is idState');
-  // console.log(idState, 'what is in idState');
-  // const [id, setIdState] = idState;
-
-
-  // console.log(id, 'idstate');
-
+  const [id, setIdState] = idState;
   const { productId } = props;
-  const intProps = parseInt(productId);
+  const intProps = parseInt(id);
+  console.log(intProps, 'intprops');
   const [productInfo, setProductInfo] = useState({});
 
   useEffect(() => {
@@ -31,10 +26,13 @@ const Overview = (props) => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [id]);
 
   return (
     <>
+      <a href="#google"> something</a>
+
+
       <div>
         share buttons
       </div>
