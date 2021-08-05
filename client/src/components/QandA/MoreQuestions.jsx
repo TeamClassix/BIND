@@ -1,8 +1,8 @@
 import React from 'react';
 
-const MoreQuestions = ({ noQuestions }) => (
+const MoreQuestions = () => (
   <div>
-    {noQuestions ? <button type="submit">More Questions</button> : null}
+    <button type="submit">More Questions</button>
   </div>
 );
 
