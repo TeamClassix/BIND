@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled, { css } from 'styled-components';
 
+//should i only import axios when needed?
 const Carousel = (props) => {
   const [carouselStartIndex, setCarouselStartIndex] = useState(0);
 
