@@ -79,21 +79,6 @@ const BigPicture = (props) => {
   if (props.currentZoom === 3) {
     return (
       <>
-        {/* <img id="myimage"
-          alt="zoomable"
-          src={props.imgURL} width="50%"
-          onClick={(event) => {
-            setRatio({
-              x: (event.pageX - event.target.offsetLeft),
-              y: (event.pageY - event.target.offsetTop),
-              actHeight: (event.target.attributes[1].ownerElement.naturalHeight),
-              actWidth: (event.target.attributes[1].ownerElement.naturalWidth),
-              tinyImageHeight: event.target.clientHeight,
-              tinyImageWidth: event.target.clientWidth
-            })
-          }} />
-
-        <ZoomImage src={props.imgURL} onClick={() => { props.zoomClick() }} /> */}
         <ZoomPlayground imgURL={props.imgURL} zoomClick={props.zoomClick} />
       </>
     );
