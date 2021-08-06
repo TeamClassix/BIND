@@ -15,7 +15,6 @@ const Overview = (props) => {
   // console.log(idState, 'what is in idState');
   const [id, setIdState] = idState;
 
-
   // console.log(id, 'idstate');
 
   const { productId } = props;
