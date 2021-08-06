@@ -17,7 +17,6 @@ const Overview = (props) => {
 
   // console.log(id, 'idstate');
 
-  const { productId } = props;
   const intProps = parseInt(id);
   console.log(intProps, 'intprops');
   const [productInfo, setProductInfo] = useState({});
@@ -60,4 +59,3 @@ Overview.propTypes = {
 };
 
 export default Overview;
-
