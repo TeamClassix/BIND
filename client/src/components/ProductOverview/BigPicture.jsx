@@ -12,26 +12,13 @@ import {
 import ZoomPlayground from './ZoomPlayground.jsx';
 
 
+const RightArrow = styled.span`
+color: red;
+right:0%;
+
+`;
+
 const BigPicture = (props) => {
-  const [ratio, setRatio] = useState({
-    x: (0),
-    y: (0),
-    actHeight: (0),
-    actWidth: (0),
-    tinyImageHeight: 1,
-    tinyImageWidth: 1,
-  });
-
-  const xZoom = ((100 * ratio.x / ratio.tinyImageWidth)) + '';
-  const yZoom = ((100 * ratio.y / ratio.tinyImageHeight)) + '';
-
-  const ZoomImage = styled.img`
-  object-position: ${xZoom}% ${yZoom}%;
-  width: 50%;
-  object-fit: none;
-  cursor: zoom-out;
-
-  `;
 
   const Sty = styled.img`
   ${something => props.currentZoom === 1 && css`
@@ -48,12 +35,6 @@ const BigPicture = (props) => {
     }
   `;
 
-  const RightArrow = styled.span`
-    color: red;
-    right:0%;
-
-  `;
-
   const Container = styled.div`
     position: relative;
     ${something => props.currentZoom === 1 && css`
@@ -61,20 +42,12 @@ const BigPicture = (props) => {
     width:50%;
   `
     }
-
   ${something => props.currentZoom === 2 && css`
     cursor: zoom-in;
     width:100%;
 `
     }
 `;
-
-  const fiddle = new Image();
-  // fiddle.onload = function() {
-  //   alert(this.width + 'x' + this.height);
-  // }
-  fiddle.src = props.imgURL;
-  // document.body.appendChild(fiddle);
 
   if (props.currentZoom === 3) {
     return (

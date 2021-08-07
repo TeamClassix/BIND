@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 
 
@@ -17,8 +17,6 @@ position:relative;
 const ProductDescription = (data) => {
   //should destructure the info from data
   const { info } = data;
-
-
 
   let feats;
   if (info.features) {

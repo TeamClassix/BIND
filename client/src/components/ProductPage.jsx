@@ -1,14 +1,8 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext,Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
-
-import ProductOverview from './ProductOverview/Overview';
-import RelatedProducts from './RelatedProducts/RelatedProducts';
-import QuestionsAnswers from './QandA/App';
-import RatingsReviews from './RatingsReviews/RatingsReviews';
 import ErrorPage from './ErrorPage';
-// eslint-disable-next-line import/no-unresolved
 import { AppContext } from '#contexts';
 
 const ContainerDiv = styled.div`
@@ -28,7 +22,7 @@ const getProductInfo = async (id) => {
 
 const ProductPage = () => {
   const { appState, errState, idState } = useContext(AppContext);
-  console.log({appState, errState, idState});
+  // console.log({ appState, errState, idState });
 
   const [useAppState, setAppState] = appState;
   const [useErrState, setErrState] = errState;
@@ -54,6 +48,14 @@ const ProductPage = () => {
     });
   }, []);
 
+  const ProductOverview = React.lazy(() => import('./ProductOverview/Overview'));
+  const RelatedProducts = React.lazy(() => import('./RelatedProducts/RelatedProducts'));
+  const QuestionsAnswers = React.lazy(() => import('./QandA/App'));
+  const RatingsReviews = React.lazy(() => import('./RatingsReviews/RatingsReviews'));
+
+
+
+
   return (
     <ContainerDiv>
       {
@@ -67,10 +69,30 @@ const ProductPage = () => {
           ? <ErrorPage setErrState={setErrState} statusCode={useErrState} />
           : (
             <>
-              <ProductOverview productId={id} />
-              <RelatedProducts />
-              <QuestionsAnswers productId={id} />
-              <RatingsReviews productId={id} />
+              <div>
+                <Suspense fallback={<div>Loading...</div>}>
+                  <ProductOverview />
+                </Suspense>
+              </div>
+
+              <div>
+                <Suspense fallback={<div>Loading...</div>}>
+                  <RelatedProducts />
+                </Suspense>
+              </div>
+
+              <div>
+                <Suspense fallback={<div>Loading...</div>}>
+                  <QuestionsAnswers productId={id} />
+                </Suspense>
+              </div>
+
+              <div>
+                <Suspense fallback={<div>Loading...</div>}>
+                  <RatingsReviews productId={id} />
+                </Suspense>
+              </div>
+
             </>
           ))
       }

@@ -43,16 +43,7 @@ const RightMenu = (props) => {
     }
   };
 
-  console.log(upper, 'this needs more than one price');
 
-  // useEffect(() => {
-  //   const cachedFavorites = localStorage.getItem('favorites');
-  //   console.log(cachedFavorites, 'the cache');
-  //   console.log(cachedFavorites.includes(info), 'aaaaaaa');
-  //   setIsFavorite(cachedFavorites.includes(info));
-  // }, [info]);
-
-  // console.log(currentStyle.skus, 'the skus');
   useEffect(() => {
     axios.get(`/api/reviews/meta?product_id=${info}`, {
     })
@@ -143,7 +134,6 @@ const RightMenu = (props) => {
     noInventoryCheck = [(<option value="nothing left">Nothing Left</option>)]
   }
 
-  //builds the options value for the inventory number
   const quant = [];
   if (cats !== "Select") {
     const par = currentStyle.skus[cats].quantity;
@@ -155,7 +145,6 @@ const RightMenu = (props) => {
   }
 
 
-  //.25-.75 is half a star .75 or greater round up
   const stars = [];
   for (let star = 0.5; star < 5.5; star += 1) {
     if (star < reviewAvg && star < Math.floor(reviewAvg)) {
@@ -166,11 +155,6 @@ const RightMenu = (props) => {
       stars.push(<i className="far fa-star" />);
     }
   }
-
-  // const cartStuff = [];
-  // for (let cartIndex=0; cartIndex<cart.length; cartIndex++) {
-  //   cart[cartIndex]
-  // }
 
   if (currentZoom === 2 || currentZoom === 3) {
     return null;
@@ -192,7 +176,6 @@ const RightMenu = (props) => {
       </h1>
 
       <div>Category: {upper.category} </div>
-
 
       <div>
         current style:
@@ -219,16 +202,6 @@ const RightMenu = (props) => {
 
         <input type="submit" value="Add to Cart" />
       </form>
-
-      {/* <form onSubmit={(event) => { console.log('submit') }}>
-        <label>
-          What is in your cart:
-          <select value="Select" onChange={(event) => { console.log('not necessary') }}>
-            <option value="Select">Select One</option>
-          </select>
-        </label>
-        <input type="submit" value="Add to Cart" />
-      </form> */}
 
       <button onClick={() => { deleteCart() }}>Clear Cart</button>
       <FavStar>
