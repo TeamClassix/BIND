@@ -8,11 +8,42 @@ const RightMenu = (props) => {
   const [reviewAvg, setReviewAvg] = useState(0);
   const [reviewLength, setReviewLength] = useState(0);
   const [cart, setCart] = useState([{ sku_id: 828826, count: "62" }]);
-
   const { currentZoom, info, upper, currentStyle } = props;
+  const cachedFavorites2 = localStorage.getItem('favorites');
 
-  console.log(upper, 'this needs more than one price');
-  // console.log(currentStyle.skus, 'the skus');
+  const [isFavorite, setIsFavorite] = useState((cachedFavorites2.includes(info)));
+
+  console.log(cachedFavorites2, 'needs to push');
+  const FavStar = styled.span`
+  color: ${(current) => ((isFavorite) ? "yellow" : "gray")};
+`;
+
+  const toggleFavorites = () => {
+    console.log('toggleFavorites');
+    const favorites = JSON.parse(localStorage.getItem('favorites'));
+    console.log(favorites, 'needs to parsed');
+
+    if (favorites.includes(info)) {
+      console.log("clear");
+      // is a favorite, toggle off
+      const filtered = favorites.filter((f) => f !== info);
+
+      // console.log(filtered);
+      // setFavorites(filtered);
+      localStorage.setItem('favorites', JSON.stringify(filtered));
+      setIsFavorite(false);
+    } else {
+      console.log('add');
+      // console.log(favorites.concat([id]));
+      // setFavorites(favorites.concat(id));
+      localStorage.setItem('favorites', JSON.stringify(favorites.concat(info)));
+      setIsFavorite(true);
+
+      // not a favorite, toggle on
+    }
+  };
+
+
   useEffect(() => {
     axios.get(`/api/reviews/meta?product_id=${info}`, {
     })
@@ -92,7 +123,7 @@ const RightMenu = (props) => {
   const optsize = skuser.map((siz) => {
     // console.log(siz, 'siz and sizes');
     if (currentStyle.skus[siz].quantity === 0) {
-      countNoInventory+=1;
+      countNoInventory += 1;
       return null;
     }
     return (<option value={siz}>{currentStyle.skus[siz].size}</option>);
@@ -103,7 +134,6 @@ const RightMenu = (props) => {
     noInventoryCheck = [(<option value="nothing left">Nothing Left</option>)]
   }
 
-  //builds the options value for the inventory number
   const quant = [];
   if (cats !== "Select") {
     const par = currentStyle.skus[cats].quantity;
@@ -115,7 +145,6 @@ const RightMenu = (props) => {
   }
 
 
-  //.25-.75 is half a star .75 or greater round up
   const stars = [];
   for (let star = 0.5; star < 5.5; star += 1) {
     if (star < reviewAvg && star < Math.floor(reviewAvg)) {
@@ -126,11 +155,6 @@ const RightMenu = (props) => {
       stars.push(<i className="far fa-star" />);
     }
   }
-
-  // const cartStuff = [];
-  // for (let cartIndex=0; cartIndex<cart.length; cartIndex++) {
-  //   cart[cartIndex]
-  // }
 
   if (currentZoom === 2 || currentZoom === 3) {
     return null;
@@ -152,7 +176,6 @@ const RightMenu = (props) => {
       </h1>
 
       <div>Category: {upper.category} </div>
-
 
       <div>
         current style:
@@ -180,20 +203,10 @@ const RightMenu = (props) => {
         <input type="submit" value="Add to Cart" />
       </form>
 
-      {/* <form onSubmit={(event) => { console.log('submit') }}>
-        <label>
-          What is in your cart:
-          <select value="Select" onChange={(event) => { console.log('not necessary') }}>
-            <option value="Select">Select One</option>
-          </select>
-        </label>
-        <input type="submit" value="Add to Cart" />
-      </form> */}
-
       <button onClick={() => { deleteCart() }}>Clear Cart</button>
-      <span style={{ "color": "Dodgerblue" }}>
-        <i onClick={() => console.log('this should change favorites')} className="fas fa-star"></i>
-      </span>
+      <FavStar>
+        <i onClick={() => toggleFavorites()} className="fas fa-star"></i>
+      </FavStar>
       <br />
 
     </>
@@ -206,3 +219,4 @@ RightMenu.propTypes = {
 
 export default RightMenu;
 
+//span style={{ "color": "Dodgerblue" }}

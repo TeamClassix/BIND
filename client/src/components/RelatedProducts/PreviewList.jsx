@@ -35,6 +35,7 @@ const LeftControlDiv = styled.div`
 const PreviewList = ({ title, list }) => {
   const [rpStart, setRpStart] = useState(0);
   const handleClick = (direction) => {
+    console.log('handleclick in preview list clicked');
     let newVal = rpStart + 4 * direction;
     if (newVal < 0) newVal = 0;
     // if (newVal > list.length - 1) newVal = list.length;

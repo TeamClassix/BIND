@@ -1,19 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
-import styled, { css } from 'styled-components';
 import axios from 'axios';
-import PropTypes from 'prop-types';
+
+// import PropTypes from 'prop-types';
 import ProductDescription from './ProductDescription.jsx';
 import StyleSelect from './StyleSelect.jsx';
-import { RelatedProductsContext, AppContext } from '../../contexts/Contexts.jsx';
+import { AppContext } from '../../contexts/Contexts.jsx';
 
 
 const Overview = (props) => {
-
   const { idState } = useContext(AppContext);
-  const [id, setIdState] = idState;
-  const { productId } = props;
+  const [id] = idState;
+
   const intProps = parseInt(id);
-  console.log(intProps, 'intprops');
   const [productInfo, setProductInfo] = useState({});
 
   useEffect(() => {
@@ -47,10 +45,6 @@ const Overview = (props) => {
       </div>
     </>
   );
-};
-
-Overview.propTypes = {
-  productId: PropTypes.string.isRequired
 };
 
 export default Overview;

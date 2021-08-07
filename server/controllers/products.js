@@ -1,8 +1,6 @@
 const express = require('express');
 
-// does this do anythng currently?
-// eslint-disable-next-line import/no-unresolved
-// const Models = require('#models');
+//so potentially don't use the server at all.
 
 const router = express.Router({ mergeParams: true });
 

@@ -1,0 +1,1 @@
+(self.webpackChunkteam_classix_fec=self.webpackChunkteam_classix_fec||[]).push([[594],{13594:(e,t,s)=>{"use strict";s.r(t),s.d(t,{default:()=>c});var a=s(67294);const c=function(){return a.createElement("div",{id:"google"},a.createElement("h1",null,"RatingsReviews"))}}}]);
