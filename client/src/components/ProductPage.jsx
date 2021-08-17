@@ -8,6 +8,7 @@ import RelatedProducts from './RelatedProducts/RelatedProducts';
 import QuestionsAnswers from './QandA/App';
 import RatingsReviews from './RatingsReviews/RatingsReviews';
 import ErrorPage from './ErrorPage';
+
 // eslint-disable-next-line import/no-unresolved
 import { AppContext } from '#contexts';
 
