@@ -3,21 +3,30 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const QuestionModal = ({ show, onClose, productName, productId }) => {
-  const [answerBody, setAnswerBody] = useState('');
+  const [questionBody, setQuestionBody] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
   const submitQuestion = () => (
     axios.post('/api/qa/questions', {
-      body: answerBody,
+      body: questionBody,
       name: name,
       email: email,
       product_id: productId,
     })
+      .then(onClose)
   );
 
+  const checkForm = () => {
+    if (questionBody === '' || name === '' || email === '') {
+      window.alert('Missing mandatory field. Please make sure all fields are filled.');
+    } else {
+      submitQuestion();
+    }
+  };
+
   const handleQuestionBody = (event) => {
-    setAnswerBody(event.target.value);
+    setQuestionBody(event.target.value);
   };
 
   const handleName = (event) => {
@@ -60,12 +69,12 @@ const QuestionModal = ({ show, onClose, productName, productId }) => {
         <form>
           Your e-mail*
           <br />
-          <input placeholder="jackson@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" onChange={handleEmail} />
+          <input placeholder="jackson@email.com" onChange={handleEmail} />
           <br />
           For authentication reasons, you will not be emailed.
         </form>
       </div>
-      <button type="submit" onClick={submitQuestion}>Submit Question</button>
+      <button type="submit" onClick={checkForm}>Submit Question</button>
       <button type="submit" onClick={onClose}>Close</button>
     </div>
   );

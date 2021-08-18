@@ -2,6 +2,33 @@
 import React, { useState } from 'react';
 import AnswerModal from './AnswerModal';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const Interactions = styled.div`
+  display: flex;
+  flex-direction: row;
+  font-size: small;
+  text-align: right;
+  position: relative;
+  left: 470px;
+  top: -7px;
+  text-transform: uppercase;
+`;
+
+const Click = styled.div`
+  cursor: pointer;
+  &:hover{
+    text-decoration: underline
+  }
+`;
+
+const Question = styled.div`
+  position: relative;
+  top: 10px;
+  font-size: 1em;
+  font-weight: bolder;
+  text-transform: uppercase;
+`;
 
 const QuestionItem = ({ id, question, helpful, productName }) => {
   const [answerShow, setAnswerShow] = useState(false);
@@ -34,20 +61,22 @@ const QuestionItem = ({ id, question, helpful, productName }) => {
   const handleAddAnswer = () => (setAnswerShow(true));
   return (
     <div>
-      <div className="question">
-        <h4>{`Q: ${question}`}</h4>
-      </div>
-      <div className="helpful">
-        Helpful?
-      </div>
-      <div className="yes" onClick={incrementHelpfulness}>
-        {`Yes(${count}) | `}
-      </div>
-      <div onClick={handleAddAnswer}>Add Answer</div>
-      <div className="Report" onClick={handleReport} >
-        {report ? 'Reported' : 'Report'}
-      </div>
-      <AnswerModal onClose={() => setAnswerShow(false)} show={answerShow} questionId={id} question={question} productName={productName} />
+      <Question className="question">
+        {`Q:   ${question}`}
+      </Question>
+      <Interactions>
+        <div className="helpful">
+          Helpful?&nbsp;
+        </div>
+        <Click className="yes" onClick={incrementHelpfulness}>
+          {`Yes(${count}) | `}
+        </Click>
+        <Click onClick={handleAddAnswer}>&nbsp;Add Answer |&nbsp;</Click>
+        <Click className="Report" onClick={handleReport} >
+          {report ? 'Reported' : 'Report'}
+        </Click>
+        <AnswerModal onClose={() => setAnswerShow(false)} show={answerShow} questionId={id} question={question} productName={productName} />
+      </Interactions>
     </div>
   );
 };
